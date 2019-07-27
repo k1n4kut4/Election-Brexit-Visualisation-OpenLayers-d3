@@ -131,7 +131,117 @@ export class D3mapComponent implements OnInit {
   ngAfterContentInit() {
     // Select <p> element using d3 and change style..
       d3.select('p').style('color', 'red');
+
+      let error;
+      let uk;
+      let boundaries_two;
+      let boundaries;
+      let bes = this.bes;
+      let signatures; 
+
+      this.mapFeatures = topojson.feature(this.uk, this.uk.objects.subunits).features;
+
+      let map = this.mapContainer.append("g").attr("class", "subunits").selectAll("path").data(this.mapFeatures);
+      let constituency_two = boundaries_two,
+        constituency = boundaries.data, 
+        signature_data = signatures.data.attributes,
+        petition = signatures.data.attributes.signatures_by_constituency,
+        legend,
+        content,
+        content_two,
+        conservativesCount = 0,
+        labourCount = 0,
+        ukipCount = 0,
+        libCount = 0,
+        greenCount = 0,
+        plaidCount = 0,
+        snpCount = 0,
+        dupCount = 0,
+        otherCount = 0,
+        notCounted = 0;
+  
+      let colorWheel = {};
+      colorWheel["con"] = "#0382AB";
+      colorWheel["lab"] = "#DA1502";
+      colorWheel["ukip"] = "#722889";
+      colorWheel["lib"] = "#FDB218";
+      colorWheel["grn"] = "#7AB630";
+      colorWheel["plaid"] = "#3C862D";
+      colorWheel["snp"] = "#F0DE4C";
+      colorWheel["dup"] = "#FF9900";
+      colorWheel["other"] = "gray";
+  
+      let colorWheelNumber = {};
+      colorWheel["grn"] = 0;
+      colorWheel["lab"] = 1;
+      colorWheel["con"] = 2;
+      colorWheel["snp"] = 3;
+      colorWheel["plaid"] = 4;
+      colorWheel["lib"] = 5;
+      colorWheel["ukip"] = 9;
+      colorWheel["dup"] = 10;
+      colorWheel["other"] = 11;
       
+      map.enter()
+      .append("path")
+      .attr("class", function(d, i) {
+
+        let badge = "f0";
+                      
+        if (typeof constituency_two[d.properties.id - 1] === "undefined" || typeof constituency_two[d.properties.id] === "undefined") {
+               
+              badge = "f2";
+            } else {
+
+              if (constituency_two[d.properties.id - 1].id === "108") {
+                 
+                badge = "f2";
+              } else 
+              if (constituency_two[d.properties.id - 1].id === "650") {
+                badge = "f2";
+              } else {
+
+                let chosenColour; 
+                switch (constituency_two[d.properties.id].win) {
+                    case "grn":
+                      chosenColour = 0;
+                      break;
+                    case "lab":
+                      chosenColour = 1;
+                      break;
+                    case "con":
+                      chosenColour = 2;
+                      break;
+                    case "snp":
+                      chosenColour = 3;
+                      break;
+                    case "plc":
+                      chosenColour = 4;
+                      break;
+                    case "lib":
+                      chosenColour = 5;
+                      break;
+                    case "ukip":
+                      chosenColour = 9;
+                      break;
+                    case "dup":
+                      chosenColour = 10;
+                      break;
+                    case "other":
+                      chosenColour = 11;
+                      break;
+                }
+
+                //constituency is the press id, election results/colour and region name etc
+                //d is the polygons, press id, and constituency name
+ 
+                badge = "f2"; 
+              }
+
+          } 
+          return "ward ward-" + d.properties.id + " " + badge;
+      })
+      .attr("d", this.path);  //path of id higher by 1 gets assigned to correct colour
 
   }
 
