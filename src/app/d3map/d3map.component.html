@@ -1,3 +1,33 @@
 <p>D3 Lab 2 , P Tag color changed...</p>
 
+<div id="electionContainer">
+    
+    <div id="electionMapContainer">
+      <div id="electionMap"></div>
+    </div>
+    <div id="pageContainer">
+  		<h3 class="instructions">
+            Tap (rollover on desktop) constituency on map to see 2016 EU Referendum result
+        </h3>
+	  	<p>Government data is by local authority, which gives no idea of how an MP's area voted - here I present data regrouped by Parliamentary constituency</p>
+        <p id="total">
+            <strong>Leave in 2016 ref</strong>: 17,410,742 VOTES
+            </br>
+            <strong>Remain in 2016 ref</strong>: 16,141,241 VOTES
+            </br>
+            <strong>Remain Petition 2019 (Latest Total in Parliamentary Database)</strong>: 
+            <span id="totalSignatures"></span>
+        </p>
+        <div id="tooltipContainer"></div>
+        <div class='electionResultsContainer'>
+            <div class='electionResultsContainerL'>
+            </div>
+            <div class='electionResultsContainerR'>
+            </div>
+            </div>
+        <div id="tooltipContainer_two"></div>
+    </div>
+
+</div>
+
 <svg class="mysvg" width="400px" height="400px" (click)="svgclickhandle($event)"/>
