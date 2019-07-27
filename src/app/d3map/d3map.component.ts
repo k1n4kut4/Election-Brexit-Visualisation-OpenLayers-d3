@@ -6,6 +6,8 @@ import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import * as d3Axis from 'd3-axis';
+import * as d3Queue from 'd3-queue';
+import * as d3Zoom from 'd3-zoom';
 
 @Component({
   selector: 'app-d3map',
@@ -36,9 +38,9 @@ export class D3mapComponent implements OnInit {
   path = d3Geo.geoPath().projection(this.projection);
   
   // add d3 zoom behaviour to map container.
-  /* zoom = d3.behavior.zoom()
+ zoom = d3Zoom.zoom()
     .scaleExtent([1, 10])
-    .on("zoom", this.zoomed); */
+    .on("zoom", this.zoomed); 
 
   // set up SVG, viewport and clipping mask for map
   svg = d3.select('#electionMap')
@@ -48,8 +50,8 @@ export class D3mapComponent implements OnInit {
     .attr('viewBox', '0 0 ' + this.width + ' ' + this.height)
     .attr('perserveAspectRatio', 'xMinYMid')
     .attr('id', "sizer-map")
-    .attr('class', "sizer");
-    //.call(this.zoom);
+    .attr('class', "sizer")
+    .call(this.zoom);
   
   main = this.svg.append("g")
     .attr('transform', 'translate(0,0)')
@@ -104,7 +106,7 @@ export class D3mapComponent implements OnInit {
     .attr('class', "sizer");
 
   // use queue function to load map and results data asynchronously, then call ready function when done.
-  /* queue()
+  /* a = d3Queue.queue.
     .defer(d3.json, "./assets/json/map.json") //map polygons
     .defer(d3.json, "./assets/json/mp_details_full.json") //constit names and 2017 election results
     .defer(d3.json, "./assets/json/election-data.json") //constit names and 2015 election results
@@ -129,6 +131,8 @@ export class D3mapComponent implements OnInit {
   ngAfterContentInit() {
     // Select <p> element using d3 and change style..
       d3.select('p').style('color', 'red');
+      
+
   }
 
   zoomed() {
@@ -136,7 +140,7 @@ export class D3mapComponent implements OnInit {
       s = d3.event.scale;
     t[0] = Math.min(this.width / 2 * (s - 1), Math.max(this.width / 2 * (1 - s) - 150 * s, t[0]));
     t[1] = Math.min(this.height / 2 * (s - 1) + 230 * s, Math.max(this.height / 2 * (1 - s) - 230 * s, t[1]));
-    //this.zoom.translate(t);
+    //this.zoom.translate(t); 
     this.mapContainer.style("stroke-width", 1 / s).attr("transform", "translate(" + t + ")scale(" + s + ")");
   }
 
