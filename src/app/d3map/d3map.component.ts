@@ -17,6 +17,8 @@ import * as topojson from 'topojson';
 })
 export class D3mapComponent implements OnInit { 
 
+  Topojson: any;
+
   // map viewport dimensions
   width = 460;
   height = 650;
@@ -138,9 +140,9 @@ export class D3mapComponent implements OnInit {
       let boundaries_two;
       let boundaries;
       let bes = this.bes;
-      let signatures; 
+      let signatures;  
 
-      this.mapFeatures = topojson.feature(this.uk, this.uk.objects.subunits).features;
+      this.mapFeatures = topojson.feature(this.uk, this.uk.objects.subunits);//.features;
 
       let map = this.mapContainer.append("g").attr("class", "subunits").selectAll("path").data(this.mapFeatures);
       let constituency_two = boundaries_two,
