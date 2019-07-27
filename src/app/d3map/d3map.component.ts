@@ -60,7 +60,7 @@ export class D3mapComponent implements OnInit {
       image: new Icon(({
         color: '#4271AE',
         crossOrigin: 'anonymous',
-        src: 'assets/vectorpoint.svg',
+        src: 'svg/assets/vectorpoint.svg',
         imgSize: [20, 20]
       }))
     }));
@@ -69,7 +69,7 @@ export class D3mapComponent implements OnInit {
       image: new Icon(({
         color: [113, 140, 0],
         crossOrigin: 'anonymous',
-        src: 'assets/dot.png',
+        src: 'png/assets/dot.png',
         imgSize: [20, 20]
       }))
     }));
