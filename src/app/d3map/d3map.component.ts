@@ -18,7 +18,7 @@ import {Icon, Style} from 'ol/style';
   templateUrl: './d3map.component.html',
   styleUrls: ['./d3map.component.scss']
 })
-export class D3MapComponent implements OnInit {
+export class D3mapComponent implements OnInit {  
   map;
   chicago;
   vectorSource;
@@ -26,9 +26,10 @@ export class D3MapComponent implements OnInit {
   rasterLayer;
   london: any;
   madrid: any;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.initilizeMap();
   }
 
