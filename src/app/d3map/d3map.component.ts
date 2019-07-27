@@ -8,6 +8,7 @@ import * as d3Array from 'd3-array';
 import * as d3Axis from 'd3-axis';
 import * as d3Queue from 'd3-queue';
 import * as d3Zoom from 'd3-zoom';
+import * as topojson from 'topojson';
 
 @Component({
   selector: 'app-d3map',
