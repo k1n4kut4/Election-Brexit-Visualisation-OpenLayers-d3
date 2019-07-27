@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //import * as d3 from 'd3';
 import * as d3 from 'd3-selection';
+import * as d3Geo from 'd3-geo';
 import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
 import * as d3Array from 'd3-array';
@@ -11,28 +12,28 @@ import * as d3Axis from 'd3-axis';
   templateUrl: './d3map.component.html',
   styleUrls: ['./d3map.component.scss']
 })
-export class D3mapComponent implements OnInit {
+export class D3mapComponent implements OnInit { 
 
   // map viewport dimensions
   width = 460;
   height = 650;
 
   // create a scale of colours for each party, so we can map results to constituency segments
-  quantize = d3Scale.quantize()
+  /* quantize = d3Scale.scaleQuantize()
     .domain([1, 11])
     .range(d3.range(11).map(function(i) {
       return "f" + i;
-    }));
+    })); */
   
   // set up map projection, and position it.
-  projection = d3.geo.albers()
+  projection = d3Geo.geoAlbers()
     .center([1.5, 55.2])
     .rotate([4.4, 0])
     .parallels([50, 50])
     .scale(3300)
     .translate([this.width / 2, this.height / 2]);
 
-  path = d3.geo.path().projection(this.projection);
+  path = d3Geo.geoPath().projection(this.projection);
   
   // add d3 zoom behaviour to map container.
   /* zoom = d3.behavior.zoom()
@@ -103,13 +104,13 @@ export class D3mapComponent implements OnInit {
     .attr('class', "sizer");
 
   // use queue function to load map and results data asynchronously, then call ready function when done.
-  queue()
+  /* queue()
     .defer(d3.json, "./assets/json/map.json") //map polygons
     .defer(d3.json, "./assets/json/mp_details_full.json") //constit names and 2017 election results
     .defer(d3.json, "./assets/json/election-data.json") //constit names and 2015 election results
     .defer(d3.json, "./assets/json/constit_ons.json") //convert press assoc code to ons code
     .defer(d3.json, "./assets/json/petitions-241584.json") //petition signature counts
-    .await(ready);
+    .await(ready); */
 
   uk;
   mapFeatures;
