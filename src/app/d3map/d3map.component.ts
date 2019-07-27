@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
+import * as MAPBOX_CONFIG from '../../assets/json/MAPBOX_CONFIG.json';
 import Map from 'ol/Map';
 import Tile from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
@@ -28,10 +29,10 @@ export class D3mapComponent implements OnInit {
   madrid: any;
   key: any;
 
-  constructor() { }
+  constructor() { } 
 
-  ngOnInit() { 
-    this.key = "";
+  ngOnInit() {  
+    this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
     this.initilizeMap();
   }
 
