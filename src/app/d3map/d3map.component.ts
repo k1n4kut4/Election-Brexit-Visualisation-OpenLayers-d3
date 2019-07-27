@@ -26,10 +26,12 @@ export class D3mapComponent implements OnInit {
   rasterLayer;
   london: any;
   madrid: any;
+  key: any;
 
   constructor() { }
 
   ngOnInit() { 
+    this.key = "";
     this.initilizeMap();
   }
 
@@ -84,7 +86,7 @@ export class D3mapComponent implements OnInit {
   
     this.rasterLayer = new TileLayer({
       source: new TileJSON({
-        url: 'https://api.tiles.mapbox.com/v3/mapbox.geography-class.json?secure',
+        url: 'https://api.tiles.mapbox.com/v4/mapbox.geography-class.json?secure&access_token=' + this.key,
         crossOrigin: ''
       })
     });
