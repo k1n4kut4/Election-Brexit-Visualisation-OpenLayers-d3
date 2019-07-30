@@ -9,6 +9,7 @@ import sVector from 'ol/source/Vector';
 import lVector from 'ol/layer/Vector';
 import Point from 'ol/geom/Point';
 import { fromLonLat } from 'ol/proj.js';
+import TopoJSON from 'ol/format/TopoJSON.js';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
@@ -24,6 +25,7 @@ export class D3mapComponent implements OnInit {
   chicago;
   vectorSource;
   vectorLayer;
+  topoJSONLayer;
   rasterLayer;
   london: any;
   madrid: any;
@@ -79,8 +81,8 @@ export class D3mapComponent implements OnInit {
   
     this.vectorSource = new VectorSource({
       features: [this.chicago, this.madrid,this.london]
-    });
-  
+    }); 
+
     this.vectorLayer = new VectorLayer({
       source: this.vectorSource
     });
@@ -90,14 +92,26 @@ export class D3mapComponent implements OnInit {
         url: 'https://api.tiles.mapbox.com/v4/mapbox.geography-class.json?secure&access_token=' + this.key,
         crossOrigin: ''
       })
+    }); 
+
+    this.topoJSONLayer = new VectorLayer({
+      source: new VectorSource({
+        url: 'assets/json/map.json',
+        format: new TopoJSON({
+          // don't want to render the full world polygon (stored as 'land' layer),
+          // which repeats all countries
+          layers: ['subunits']
+        }),
+        overlaps: false
+      })
     });
 
     this.map = new Map({
       target: 'map',
-      layers: [ this.rasterLayer, this.vectorLayer ],
+      layers: [ this.rasterLayer, this.vectorLayer, this.topoJSONLayer ],
       view: new View({
-        center: fromLonLat([2.896372, 44.60240]),
-        zoom: 3
+        center: fromLonLat([-0.75583, 54.04172]),
+        zoom: 6
       })
     });
   }
