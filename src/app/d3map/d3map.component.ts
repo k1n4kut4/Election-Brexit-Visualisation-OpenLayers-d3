@@ -21,14 +21,11 @@ import {Icon, Style} from 'ol/style';
   styleUrls: ['./d3map.component.scss']
 })
 export class D3mapComponent implements OnInit {  
-  map;
-  chicago;
+  map; 
   vectorSource;
   vectorLayer;
   topoJSONLayer;
-  rasterLayer;
-  london: any;
-  madrid: any;
+  rasterLayer; 
   key: any;
 
   constructor() { } 
@@ -38,11 +35,7 @@ export class D3mapComponent implements OnInit {
     this.initilizeMap();
   }
 
-  initilizeMap() {
-
-    this.chicago = new Feature({
-      geometry: new Point(fromLonLat([	-87.623177, 41.881832]))
-    });
+  initilizeMap() { 
   
     this.rasterLayer = new TileLayer({
       source: new TileJSON({
@@ -54,9 +47,7 @@ export class D3mapComponent implements OnInit {
     this.topoJSONLayer = new VectorLayer({
       source: new VectorSource({
         url: 'assets/json/map.json',
-        format: new TopoJSON({
-          // don't want to render the full world polygon (stored as 'land' layer),
-          // which repeats all countries
+        format: new TopoJSON({ 
           layers: ['subunits']
         }),
         overlaps: false
@@ -68,14 +59,15 @@ export class D3mapComponent implements OnInit {
       layers: [ this.rasterLayer, this.topoJSONLayer ],
       view: new View({
         center: fromLonLat([-0.75583, 54.04172]),
-        zoom: 6
+        zoom: 7
       })
     });
 
     this.map.on('pointermove', (browserEvent) => { 
+      console.log("mouse over the map");
       let coordinate = browserEvent.coordinate; 
       let pixel = this.map.getPixelFromCoordinate(coordinate); 
-      let el = document.getElementById('name');
+      let el = document.getElementById('const_details');
       el.innerHTML = 'Scroll mouse over a constituency';
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
         el.innerHTML = feature.get('id') + ': ' + feature.get('name') + '';

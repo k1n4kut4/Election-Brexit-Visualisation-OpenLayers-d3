@@ -1,23 +1,25 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+<div class="container">
 
-    <mat-card fxFlex="50%">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>  
+
+            <div id="const_details" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center">
+                Scroll mouse over a constituency
+            </div>
+
+        </mat-card-content> 
+    </mat-card>
+
+    <mat-card>
         <mat-card-header>
             <mat-card-title>Map</mat-card-title>
         </mat-card-header>
         <mat-card-content> 
 
             <div id="map" class="map"></div>
-
-        </mat-card-content> 
-    </mat-card>
-
-    <mat-card fxFlex="50%">
-        <mat-card-header>
-            <mat-card-title>Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>  
-
-            <div id="name">Scroll mouse over a constituency</div>
 
         </mat-card-content> 
     </mat-card>

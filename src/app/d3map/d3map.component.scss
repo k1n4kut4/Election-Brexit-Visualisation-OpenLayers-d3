@@ -1,10 +1,31 @@
 .container {
-    padding: 10px 0 0 0;
+    padding: 0; 
 
-    mat-card-title {
-        font-weight: 400;
-        font-size: 1.7em;
-        margin: 11px;
+    mat-card {
+        float: left;
+        position: relative;
+        width: 44%;
+        margin: 1%;
+
+        #map {
+            width: 45%; 
+            height: 90%; 
+            position:fixed; 
+        }
     }
+}
 
+@media only screen and (max-width: 768px) {
+
+    .container {
+
+        mat-card {
+
+            width: 100%; 
+
+            #map {
+                width: 100%; 
+            }
+        }
+    }
 }

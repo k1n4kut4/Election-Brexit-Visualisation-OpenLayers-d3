@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { D3mapComponent } from './d3map/d3map.component';
 
 import { MatButtonModule,
+         MatGridListModule,
          MatTableModule,
          MatFormFieldModule,
          MatInputModule,
@@ -23,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     AppRoutingModule,
     MatButtonModule,
+    MatGridListModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
