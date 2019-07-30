@@ -5,6 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { D3mapComponent } from './d3map/d3map.component';
 
+import { MatButtonModule,
+         MatTableModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatCardModule, 
+         MatSelectModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +19,13 @@ import { D3mapComponent } from './d3map/d3map.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule, 
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
