@@ -12,6 +12,8 @@ import { MatButtonModule,
          MatCardModule, 
          MatSelectModule } from '@angular/material';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { MatButtonModule,
     MatInputModule,
     MatCardModule, 
     MatSelectModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
