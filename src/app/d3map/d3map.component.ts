@@ -78,7 +78,7 @@ export class D3mapComponent implements OnInit {
       let el = document.getElementById('name');
       el.innerHTML = 'Scroll mouse over a constituency';
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
-        el.innerHTML = feature.get('name') + '';
+        el.innerHTML = feature.get('id') + ': ' + feature.get('name') + '';
       });
     });
   } 
