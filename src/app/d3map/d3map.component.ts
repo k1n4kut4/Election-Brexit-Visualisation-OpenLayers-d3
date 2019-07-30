@@ -43,49 +43,6 @@ export class D3mapComponent implements OnInit {
     this.chicago = new Feature({
       geometry: new Point(fromLonLat([	-87.623177, 41.881832]))
     });
-
-    this.chicago.setStyle(new Style({
-      image: new Icon(({
-        color: '#8959A8',
-        crossOrigin: 'anonymous',
-        src: 'assets/svg/vectorpoint.svg',
-        imgSize: [20, 20]
-      }))
-    }));
-
-    this.london = new Feature({
-      geometry: new Point(fromLonLat([-0.12755, 51.507222]))
-    });
-  
-    this.madrid = new Feature({
-      geometry: new Point(fromLonLat([-3.683333, 40.4]))
-    });
-
-    this.london.setStyle(new Style({
-      image: new Icon(({
-        color: '#4271AE',
-        crossOrigin: 'anonymous',
-        src: 'assets/svg/vectorpoint.svg',
-        imgSize: [20, 20]
-      }))
-    }));
-  
-    this.madrid.setStyle(new Style({
-      image: new Icon(({
-        color: [113, 140, 0],
-        crossOrigin: 'anonymous',
-        src: 'assets/png/dot.png',
-        imgSize: [20, 20]
-      }))
-    }));
-  
-    this.vectorSource = new VectorSource({
-      features: [this.chicago, this.madrid,this.london]
-    }); 
-
-    this.vectorLayer = new VectorLayer({
-      source: this.vectorSource
-    });
   
     this.rasterLayer = new TileLayer({
       source: new TileJSON({
@@ -108,12 +65,22 @@ export class D3mapComponent implements OnInit {
 
     this.map = new Map({
       target: 'map',
-      layers: [ this.rasterLayer, this.vectorLayer, this.topoJSONLayer ],
+      layers: [ this.rasterLayer, this.topoJSONLayer ],
       view: new View({
         center: fromLonLat([-0.75583, 54.04172]),
         zoom: 6
       })
     });
-  }
+
+    this.map.on('pointermove', (browserEvent) => { 
+      let coordinate = browserEvent.coordinate; 
+      let pixel = this.map.getPixelFromCoordinate(coordinate); 
+      let el = document.getElementById('name');
+      el.innerHTML = 'Scroll mouse over a constituency';
+      this.map.forEachFeatureAtPixel(pixel, function(feature) {
+        el.innerHTML = feature.get('name') + '';
+      });
+    });
+  } 
 
 }
