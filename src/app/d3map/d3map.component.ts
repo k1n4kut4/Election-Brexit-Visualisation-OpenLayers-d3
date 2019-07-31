@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'; 
+import { DataService } from '../data.service';
+
 import Map from 'ol/Map';
 import Tile from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
@@ -16,6 +18,31 @@ import {Icon, Style} from 'ol/style';
 
 import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 import * as ConstitData from '../../assets/json/mp_details_full.json'; 
+
+export class MapData {
+  constructor(
+    code_ons: string,
+    constit: string,
+    region: string,
+    mp_img: string,
+    mp_name: string,
+    electorate_size: string, 
+    votes: string,
+    status: string,
+    win: string,
+    swing: string,
+    year: string,
+    con: string,
+    lab: string,
+    lib: string,
+    grn: string,
+    dup: string,
+    sf: string,
+    snp: string,
+    ukip: string,
+    uup: string,
+    others: string) {}
+}
 
 @Component({
   selector: 'app-d3map',
@@ -100,7 +127,7 @@ export class D3mapComponent implements OnInit {
         + "" + cd[id]["ukip"] 
         + "" + cd[id]["uup"]
         + "" + cd[id]["others"];
-        
+
       });
     });
   } 
