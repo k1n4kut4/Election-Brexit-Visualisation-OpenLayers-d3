@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'; 
-import * as MAPBOX_CONFIG from '../../assets/json/MAPBOX_CONFIG.json';
 import Map from 'ol/Map';
 import Tile from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
@@ -14,6 +13,9 @@ import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import {Icon, Style} from 'ol/style';
+
+import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
+import * as ConstitData from '../../assets/json/mp_details_full.json'; 
 
 @Component({
   selector: 'app-d3map',
@@ -33,6 +35,8 @@ export class D3mapComponent implements OnInit {
   ngOnInit() {  
     this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
     this.initilizeMap();
+    const cd = ConstitData.default;
+    console.log(cd);
   }
 
   initilizeMap() { 
@@ -71,7 +75,7 @@ export class D3mapComponent implements OnInit {
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
         el.innerHTML = feature.get('id') + ': ' + feature.get('name') + '';
 
-        
+
 
       });
     });
