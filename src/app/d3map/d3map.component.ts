@@ -35,8 +35,6 @@ export class D3mapComponent implements OnInit {
   ngOnInit() {  
     this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
     this.initilizeMap();
-    const cd = ConstitData.default;
-    console.log(cd);
   }
 
   initilizeMap() { 
@@ -73,10 +71,36 @@ export class D3mapComponent implements OnInit {
       let el = document.getElementById('const_details');
       el.innerHTML = 'Scroll mouse over a constituency';
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
-        el.innerHTML = feature.get('id') + ': ' + feature.get('name') + '';
+        const id = feature.get('id') - 1;
+        el.innerHTML = id + ': ' + feature.get('name') + '';
+        const cd = ConstitData.default;  
 
+        el.innerHTML += 
+        "" + cd[id]["code_ons"]
+        + "" + cd[id]["constit"]
+        + "" + cd[id]["region"]
 
+        + "" + cd[id]["mp_img"]
+        + "" + cd[id]["mp_name"] 
 
+        + "" + cd[id]["electorate_size"] 
+        + "" + cd[id]["votes"]  
+        + "" + cd[id]["status"]
+        + "" + cd[id]["win"] 
+        + "" + cd[id]["swing"] 
+
+        + "" + cd[id]["year"]
+        + "" + cd[id]["con"] 
+        + "" + cd[id]["lab"] 
+        + "" + cd[id]["lib"] 
+        + "" + cd[id]["grn"]
+        + "" + cd[id]["dup"]
+        + "" + cd[id]["sf"]
+        + "" + cd[id]["snp"]
+        + "" + cd[id]["ukip"] 
+        + "" + cd[id]["uup"]
+        + "" + cd[id]["others"];
+        
       });
     });
   } 
