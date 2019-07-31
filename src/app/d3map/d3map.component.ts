@@ -17,9 +17,8 @@ import VectorSource from 'ol/source/Vector';
 import {Icon, Style} from 'ol/style';
 
 import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
-import * as ConstitData from '../../assets/json/mp_details_full.json'; 
 
-export class MapData {
+export class ConstitData {
   constructor(
     code_ons: string,
     constit: string,
@@ -100,33 +99,16 @@ export class D3mapComponent implements OnInit {
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
         const id = feature.get('id') - 1;
         el.innerHTML = id + ': ' + feature.get('name') + '';
-        const cd = ConstitData.default;  
 
-        el.innerHTML += 
-        "" + cd[id]["code_ons"]
-        + "" + cd[id]["constit"]
-        + "" + cd[id]["region"]
-
-        + "" + cd[id]["mp_img"]
-        + "" + cd[id]["mp_name"] 
-
-        + "" + cd[id]["electorate_size"] 
-        + "" + cd[id]["votes"]  
-        + "" + cd[id]["status"]
-        + "" + cd[id]["win"] 
-        + "" + cd[id]["swing"] 
-
-        + "" + cd[id]["year"]
-        + "" + cd[id]["con"] 
-        + "" + cd[id]["lab"] 
-        + "" + cd[id]["lib"] 
-        + "" + cd[id]["grn"]
-        + "" + cd[id]["dup"]
-        + "" + cd[id]["sf"]
-        + "" + cd[id]["snp"]
-        + "" + cd[id]["ukip"] 
-        + "" + cd[id]["uup"]
-        + "" + cd[id]["others"];
+        this.data.getConstitData(id).subscribe(
+          (res: ConstitData[]) => { 
+            let constitData = res;
+            console.log(constitData);
+          },
+          (err) => {
+            //this.error = err; 
+          }
+        );
 
       });
     });
