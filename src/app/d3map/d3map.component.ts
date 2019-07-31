@@ -56,7 +56,7 @@ export class D3mapComponent implements OnInit {
   rasterLayer; 
   key: any;
 
-  constructor() { } 
+  constructor(private data: DataService) {}
 
   ngOnInit() {  
     this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
@@ -99,6 +99,8 @@ export class D3mapComponent implements OnInit {
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
         const id = feature.get('id') - 1;
         el.innerHTML = id + ': ' + feature.get('name') + '';
+
+        console.log(this.data.getConstitData(id));
 
         this.data.getConstitData(id).subscribe(
           (res: ConstitData[]) => { 
