@@ -13,7 +13,7 @@ export class DataService {
 
     console.log(id);
 
-    const cd = ConstitData.default;  
+    const cd = ConstitData;  
 
     console.log(cd[id]);
 
