@@ -59,18 +59,20 @@ export class D3mapComponent implements OnInit {
       layers: [ this.rasterLayer, this.topoJSONLayer ],
       view: new View({
         center: fromLonLat([-0.75583, 54.04172]),
-        zoom: 7
+        zoom: 8
       })
     });
 
-    this.map.on('pointermove', (browserEvent) => { 
-      console.log("mouse over the map");
+    this.map.on('pointermove', (browserEvent) => {  
       let coordinate = browserEvent.coordinate; 
       let pixel = this.map.getPixelFromCoordinate(coordinate); 
       let el = document.getElementById('const_details');
       el.innerHTML = 'Scroll mouse over a constituency';
       this.map.forEachFeatureAtPixel(pixel, function(feature) {
         el.innerHTML = feature.get('id') + ': ' + feature.get('name') + '';
+
+        
+
       });
     });
   } 
