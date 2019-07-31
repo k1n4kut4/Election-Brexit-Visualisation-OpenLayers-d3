@@ -96,24 +96,31 @@ export class D3mapComponent implements OnInit {
       let pixel = this.map.getPixelFromCoordinate(coordinate); 
       let el = document.getElementById('const_details');
       el.innerHTML = 'Scroll mouse over a constituency';
-      this.map.forEachFeatureAtPixel(pixel, function(feature) {
-        const id = feature.get('id') - 1;
-        el.innerHTML = id + ': ' + feature.get('name') + '';
 
-        console.log(this.data.getConstitData(id));
-
-        this.data.getConstitData(id).subscribe(
-          (res: ConstitData[]) => { 
-            let constitData = res;
-            console.log(constitData);
-          },
-          (err) => {
-            //this.error = err; 
-          }
-        );
-
+      let constit_id = this.map.forEachFeatureAtPixel(pixel, function(this, feature) {
+        return feature.get('id') - 1;
       });
+      
+      console.log(constit_id); 
+
+      console.log(this.updateConstitData(el, constit_id));
     });
   } 
+
+  updateConstitData(el, constit_id) { 
+    el.innerHTML = constit_id + '';
+
+    console.log(this.data.getConstitData(constit_id));
+
+    this.data.getConstitData(constit_id).subscribe(
+      (res: ConstitData[]) => { 
+        let constitData = res;
+        console.log(constitData);
+      },
+      (err) => {
+        //this.error = err; 
+      }
+    );
+  }
 
 }
