@@ -64,8 +64,7 @@ export class D3mapComponent implements OnInit {
   rasterLayer; 
   key: any;
   constit: ConstitDataFields = "";
-  constitData = [];
-  chosenColour: any;
+  constitData = []; 
   winnerColourWheel: any;
 
   constructor(private route: ActivatedRoute, private data: DataService) {}
@@ -118,8 +117,7 @@ export class D3mapComponent implements OnInit {
       }
       
       if(this.constitData[0] != undefined){
-        this.winnerColourWheel = this.getColourWheel(this.constitData[0]["win"]);
-        this.chosenColour = this.getChosenColour();
+        this.winnerColourWheel = this.getColourWheel(this.constitData[0]["win"]); 
         this.createBarChart(this.datatype);
       }
     });
@@ -168,42 +166,6 @@ export class D3mapComponent implements OnInit {
     }
 
     return colorWheel;
-  }
-
-  getChosenColour(){
-    let chosenColour = 0; 
-
-    switch (this.constitData[0]["win"]) {
-        case "grn":
-          chosenColour = 0;
-          break;
-        case "lab":
-          chosenColour = 1;
-          break;
-        case "con":
-          chosenColour = 2;
-          break;
-        case "snp":
-          chosenColour = 3;
-          break;
-        case "plc":
-          chosenColour = 4;
-          break;
-        case "lib":
-          chosenColour = 5;
-          break;
-        case "ukip":
-          chosenColour = 9;
-          break;
-        case "dup":
-          chosenColour = 10;
-          break;
-        case "other":
-          chosenColour = 11;
-          break;
-    }
-
-    return chosenColour;
   }
 
   createBarChart(datatype){ 
@@ -325,9 +287,7 @@ export class D3mapComponent implements OnInit {
         return d.result;
       });
 
-      var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]);
-
-      var winner = this.chosenColour;
+      var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]); 
 
       barsvg.selectAll("rect").remove();
 
