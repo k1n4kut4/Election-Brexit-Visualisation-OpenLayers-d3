@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'; 
+import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 
 import * as d3 from 'd3';
@@ -52,6 +53,7 @@ export class ConstitDataFields {
   styleUrls: ['./d3map.component.scss']
 })
 export class D3mapComponent implements OnInit {  
+  dataset: any;
   map; 
   vectorSource;
   vectorLayer;
@@ -63,9 +65,10 @@ export class D3mapComponent implements OnInit {
   chosenColour: any;
   winnerColourWheel: any;
 
-  constructor(private data: DataService) {}
+  constructor(private route: ActivatedRoute, private data: DataService) {}
 
   ngOnInit() {  
+    this.dataset = this.route.snapshot.paramMap.get('dataset'); 
     this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
     this.initilizeMap();
   }
