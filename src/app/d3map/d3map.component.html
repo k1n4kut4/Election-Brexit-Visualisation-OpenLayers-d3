@@ -5,25 +5,28 @@
             <mat-card-title>Details</mat-card-title>
 
         </mat-card-header>
-        <mat-card-content *ngFor="let constit of constitData">    
-            <div id="const_details" *ngIf="constit ===undefined">
-                Scroll mouse over a constituency
+        <mat-card-content>
+
+            <div *ngFor="let constit of constitData">  
+                <div id="const_details" *ngIf="constit ===undefined">
+                    Scroll mouse over a constituency
+                </div>
+        
+                <div *ngIf="constit !==undefined"> 
+                    <p><strong>Constituency:</strong> {{ constit.constit }} ({{ constit.code_ons }})</p>
+                    <p>{{ constit.region }}</p>
+
+                    <img src="{{ constit.mp_img }}"> 
+                    <p><strong>MP Name:</strong> {{ constit.mp_name }}</p> 
+                    <p><strong>Party:</strong> {{ constit.win }}</p>
+
+                    <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
+                    <p><strong>{{ constit.year }} status:</strong> {{ constit.stauts }}</p>
+                    <p><strong>Swing:</strong> {{ constit.swing }}</p>
+                </div>
             </div>
-    
-            <div *ngIf="constit !==undefined"> 
-                <p><strong>Constituency:</strong> {{ constit.constit }} ({{ constit.code_ons }})</p>
-                <p>{{ constit.region }}</p>
-
-                <img src="{{ constit.mp_img }}"> 
-                <p><strong>MP Name:</strong> {{ constit.mp_name }}</p> 
-                <p><strong>Party:</strong> {{ constit.win }}</p>
-
-                <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
-                <p><strong>{{ constit.year }} status:</strong> {{ constit.stauts }}</p>
-                <p><strong>Swing:</strong> {{ constit.swing }}</p>
-
-                [Table]
-            </div>
+            
+            <div id="barChart"></div>
 
         </mat-card-content> 
     </mat-card>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core'; 
 import { DataService } from '../data.service';
 
+import * as d3 from 'd3';
+import * as d3Scale from 'd3-scale';
+
 import Map from 'ol/Map';
 import Tile from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
@@ -102,8 +105,105 @@ export class D3mapComponent implements OnInit {
       }); 
 
       this.updateConstitData(constit_id);
+      this.createBarChart();
     });
   } 
+
+  createBarChart(){
+    // Barchart
+    var barchart = d3.select("#barChart")
+    .append("div")
+    .attr("class", "charty")
+    .style("opacity", 1)
+    .style("height", 0);
+
+    //Width and height of barchart
+    var w = 260,
+      h = 200,
+      barPadding = 1;
+
+    //Create bar chart
+    var barsvg = barchart
+      .append("svg:svg")
+      .attr("width", w)
+      .attr("height", h)
+      .attr('viewBox', '0 0 ' + w + ' ' + h)
+      .attr('perserveAspectRatio', 'xMinYMid')
+      .attr('id', "sizer-result")
+      .attr('class', "sizer");
+
+      var partyData = [{
+        "party": "CON",
+        "result": parseInt("94")
+      }, {
+        "party": "LAB",
+        "result": parseInt("19")
+      }, {
+        "party": "LIB",
+        "result": parseInt("83")
+      }, {
+        "party": "UKIP",
+        "result": parseInt("61")
+      }, {
+        "party": "GREEN",
+        "result": parseInt("42")
+      }];
+
+      var SortByResult = function(x, y) {
+        return y.result - x.result;
+      }; 
+
+      var max = d3.max(partyData, function(d) {
+        return d.result;
+      });
+
+      var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]);
+      
+      let chosenColour = 1;
+      var winner = chosenColour;
+
+      barsvg.attr("width", w).attr("height", h).selectAll("rect")
+        .data(partyData.sort(SortByResult).filter(function(d) {
+          return d.result !== 0;
+        }))
+        .enter()
+        .append("rect")
+        .attr("x", 100)
+        .attr("y", function(d, i) {
+          return i * (h / partyData.length);
+        })
+        .attr("width", function(d, i) {
+          return barx(d.result);
+        })
+        .attr("height", h / partyData.length - barPadding)
+        .attr("class", function(d, i) {
+          if (i < 1) {
+            return "f" + winner;
+          } else {
+            return "lightbar";
+          }
+        });
+
+      barsvg.selectAll("text")
+        .data(partyData.sort(SortByResult).filter(function(d) {
+          return d.result !== 0;
+        }))
+        .enter()
+        .append("text")
+        .text(function(d) {
+          return d.party + ": " + d.result;
+        })
+        .attr("text-anchor", "left")
+        .attr("x", function(d) {
+          return 1;
+        })
+        .attr("y", function(d, i) {
+          return i * (h / partyData.length - barPadding) + 20;
+        })
+        .attr("font-family", "Arial, Helvetica, sans-serif")
+        .attr("font-size", "12px")
+        .attr("fill", "black");
+}
 
   updateConstitData(constit_id) { 
 
