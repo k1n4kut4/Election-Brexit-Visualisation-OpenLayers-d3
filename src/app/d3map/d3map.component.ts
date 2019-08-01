@@ -134,19 +134,19 @@ export class D3mapComponent implements OnInit {
 
       var partyData = [{
         "party": "CON",
-        "result": parseInt("94")
+        "result": parseInt(this.constitData[0]["con"])
       }, {
         "party": "LAB",
-        "result": parseInt("19")
+        "result": parseInt(this.constitData[0]["lab"])
       }, {
         "party": "LIB",
-        "result": parseInt("83")
+        "result": parseInt(this.constitData[0]["lib"])
       }, {
         "party": "UKIP",
-        "result": parseInt("61")
+        "result": parseInt(this.constitData[0]["ukip"])
       }, {
         "party": "GREEN",
-        "result": parseInt("42")
+        "result": parseInt(this.constitData[0]["grn"])
       }];
 
       var SortByResult = function(x, y) {
