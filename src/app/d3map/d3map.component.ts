@@ -321,6 +321,8 @@ export class D3mapComponent implements OnInit {
 
       var winner = this.chosenColour;
 
+      barsvg.selectAll("rect").remove();
+
       barsvg.attr("width", w).attr("height", h).selectAll("rect")
         .data(partyData.sort(SortByResult).filter(function(d) {
           return d.result !== 0;
