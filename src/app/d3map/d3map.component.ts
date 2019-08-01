@@ -58,6 +58,7 @@ export class D3mapComponent implements OnInit {
   dataset: any;
   datatype: any;
   map; 
+  barData;
   vectorSource;
   vectorLayer;
   topoJSONLayer;
@@ -170,17 +171,148 @@ export class D3mapComponent implements OnInit {
 
   createBarChart(datatype){ 
 
+    if(datatype=="election"){
+
+      var partyData = [{
+        "party": "CON",
+        "result": parseInt(this.constitData[0]["con"]),
+        "colour": this.getColourWheel("con"),
+        "y": 0,
+        "width": 0
+      }, {
+        "party": "LAB",
+        "result": parseInt(this.constitData[0]["lab"]),
+        "colour": this.getColourWheel("lab"),
+        "y": 0,
+        "width": 0
+      }, {
+        "party": "LIB",
+        "result": parseInt(this.constitData[0]["lib"]),
+        "colour": this.getColourWheel("lib"),
+        "y": 0,
+        "width": 0
+      }, {
+        "party": "UKIP",
+        "result": parseInt(this.constitData[0]["ukip"]),
+        "colour": this.getColourWheel("ukip"),
+        "y": 0,
+        "width": 0
+      }, {
+        "party": "GREEN",
+        "result": parseInt(this.constitData[0]["grn"]),
+        "colour": this.getColourWheel("grn"),
+        "y": 0,
+        "width": 0
+      }];
+
+      //region parties
+
+      let whatregion = this.constitData[0]["region"];
+
+      switch (whatregion) { 
+        case "Scotland":
+          partyData.push({
+            "party": "SNP",
+            "result": parseInt(this.constitData[0]["snp"]),
+            "colour": this.getColourWheel("snp"),
+            "y": 0,
+            "width": 0
+          });
+          break;
+        case "Northern Ireland":
+          partyData.push({
+            "party": "DUP",
+            "result": parseInt(this.constitData[0]["dup"]),
+            "colour": this.getColourWheel("dup"),
+            "y": 0,
+            "width": 0
+          });
+          partyData.push({
+            "party": "UUP",
+            "result": parseInt(this.constitData[0]["uup"]),
+            "colour": this.getColourWheel("uup"),
+            "y": 0,
+            "width": 0
+          });
+          partyData.push({
+            "party": "SF",
+            "result": parseInt(this.constitData[0]["sf"]),
+            "colour": this.getColourWheel("snf"),
+            "y": 0,
+            "width": 0
+          });
+          break;
+      }
+
+      //State data puts PlaidC in "others"
+      if(whatregion=="Wales"){
+        partyData.push({
+          "party": "OTHER(S), e.g. Plaid",
+          "result": parseInt(this.constitData[0]["others"]),
+          "colour": this.getColourWheel("plc"),
+          "y": 0,
+          "width": 0
+        });
+      }else{   
+        partyData.push({
+          "party": "OTHER(S)",
+          "result": parseInt(this.constitData[0]["others"]),
+          "colour": this.getColourWheel("oth"),
+          "y": 0,
+          "width": 0
+        });
+      } 
+      
+    }else if(datatype=="petition"){
+
+      let widthSignatures = 200 * (parseInt(this.constitData[0]["signature_count"]) / parseInt(this.constitData[0]["electorate_size"]));
+      let widthAbstainees = 200 * (parseInt(this.constitData[0]["abstained"]) / parseInt(this.constitData[0]["electorate_size"]));
+
+      var partyData = [{
+        "party": "Signatures",
+        "result": parseInt(this.constitData[0]["signature_count"]),
+        "colour": this.getColourWheel("petition"),
+        "y": 0,
+        "width":  widthSignatures
+      },
+      {
+        "party": "Abstained",
+        "result": parseInt(this.constitData[0]["abstained"]),
+        "colour": this.getColourWheel("abstainees"),
+        "y": 25,
+        "width":  widthAbstainees
+      }];
+
+    }
+
+    this.barData = partyData;
+
+    var SortByResult = function(x, y) {
+      return y.result - x.result;
+    }; 
+
+    var max = d3.max(partyData, function(d) {
+      return d.result;
+    });
+
+    var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]); 
+
     // Barchart
     var barchart = d3.select("#barChart")
     .append("div")
     .attr("class", "charty")
     .style("opacity", 1)
-    .style("height", 0);
+    .style("height", 200);
 
     //Width and height of barchart
     var w = 260,
       h = 200,
       barPadding = 1;
+
+    console.log("----------"); 
+    console.log(this.constitData);
+    console.log(d3.select("#barChart"));
+    console.log(barchart);
 
     //Create bar chart
     var barsvg = barchart
@@ -192,145 +324,61 @@ export class D3mapComponent implements OnInit {
       .attr('id', "sizer-result")
       .attr('class', "sizer");
 
-      if(datatype=="election"){
+    console.log(barsvg); 
+    
+    barsvg.attr("width", w).attr("height", h)
+    .enter()
+    .attr("x", 100)
+    .attr("y", function(d, i) {
+      return i * (h / partyData.length);
+    });
 
-        var partyData = [{
-          "party": "CON",
-          "result": parseInt(this.constitData[0]["con"]),
-          "colour": this.getColourWheel("con")
-        }, {
-          "party": "LAB",
-          "result": parseInt(this.constitData[0]["lab"]),
-          "colour": this.getColourWheel("lab")
-        }, {
-          "party": "LIB",
-          "result": parseInt(this.constitData[0]["lib"]),
-          "colour": this.getColourWheel("lib")
-        }, {
-          "party": "UKIP",
-          "result": parseInt(this.constitData[0]["ukip"]),
-          "colour": this.getColourWheel("ukip")
-        }, {
-          "party": "GREEN",
-          "result": parseInt(this.constitData[0]["grn"]),
-          "colour": this.getColourWheel("grn")
-        }];
+    /* barsvg.selectAll("rect").remove();  
 
-        //region parties
+    console.log(barsvg);
 
-        let whatregion = this.constitData[0]["region"];
-
-        switch (whatregion) { 
-          case "Scotland":
-            partyData.push({
-              "party": "SNP",
-              "result": parseInt(this.constitData[0]["snp"]),
-              "colour": this.getColourWheel("snp")
-            });
-            break;
-          case "Northern Ireland":
-            partyData.push({
-              "party": "DUP",
-              "result": parseInt(this.constitData[0]["dup"]),
-              "colour": this.getColourWheel("dup")
-            });
-            partyData.push({
-              "party": "UUP",
-              "result": parseInt(this.constitData[0]["uup"]),
-              "colour": this.getColourWheel("uup")
-            });
-            partyData.push({
-              "party": "SF",
-              "result": parseInt(this.constitData[0]["sf"]),
-              "colour": this.getColourWheel("snf")
-            });
-            break;
-        }
-
-        //State data puts PlaidC in "others"
-        if(whatregion=="Wales"){
-          partyData.push({
-            "party": "OTHER(S), e.g. Plaid",
-            "result": parseInt(this.constitData[0]["others"]),
-            "colour": this.getColourWheel("plc")
-          });
-        }else{   
-          partyData.push({
-            "party": "OTHER(S)",
-            "result": parseInt(this.constitData[0]["others"]),
-            "colour": this.getColourWheel("oth")
-          });
-        } 
-        
-      }else if(datatype=="petition"){
-
-        var partyData = [{
-          "party": "Signatures",
-          "result": parseInt(this.constitData[0]["signature_count"]),
-          "colour": this.getColourWheel("con")
-        },
-        {
-          "party": "Abstained",
-          "result": parseInt(this.constitData[0]["abstained"]),
-          "colour": this.getColourWheel("lab")
-        }];
-
-      }
-
-      console.log(partyData);
-
-      var SortByResult = function(x, y) {
-        return y.result - x.result;
-      }; 
-
-      var max = d3.max(partyData, function(d) {
-        return d.result;
+    barsvg.attr("width", w).attr("height", h)
+    .selectAll("rect")
+      .data(partyData.sort(SortByResult).filter(function(d) {
+        console.log(d);
+        return d.result !== 0;
+      }))
+      .enter()
+      .append("rect")
+      .attr("x", 100)
+      .attr("y", function(d, i) {
+        return i * (h / partyData.length);
+      })
+      .attr("width", function(d, i) {
+        return barx(d.result);
+      })
+      .attr("height", h / partyData.length - barPadding)
+      .attr("style", function(d) {
+        return "fill: " + d.colour;
       });
 
-      var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]); 
-
-      barsvg.selectAll("rect").remove();
-
-      barsvg.attr("width", w).attr("height", h).selectAll("rect")
-        .data(partyData.sort(SortByResult).filter(function(d) {
-          return d.result !== 0;
-        }))
-        .enter()
-        .append("rect")
-        .attr("x", 100)
-        .attr("y", function(d, i) {
-          return i * (h / partyData.length);
-        })
-        .attr("width", function(d, i) {
-          return barx(d.result);
-        })
-        .attr("height", h / partyData.length - barPadding)
-        .attr("style", function(d) {
-          return "fill: " + d.colour;
-        });
-
-      barsvg.selectAll("text")
-        .data(partyData.sort(SortByResult).filter(function(d) {
-          return d.result !== 0;
-        }))
-        .enter()
-        .append("text")
-        .text(function(d) {
-          return d.party + ": " + d.result;
-        })
-        .attr("text-anchor", "left")
-        .attr("x", function(d) {
-          return 1;
-        })
-        .attr("y", function(d, i) {
-          return i * (h / partyData.length - barPadding) + 20;
-        })
-        .attr("font-family", "Arial, Helvetica, sans-serif")
-        .attr("font-size", "12px")
-        .attr("fill", function(d) {
-          return d.colour;
-        });
-}
+    barsvg.selectAll("text")
+      .data(partyData.sort(SortByResult).filter(function(d) {
+        return d.result !== 0;
+      }))
+      .enter()
+      .append("text")
+      .text(function(d) {
+        return d.party + ": " + d.result;
+      })
+      .attr("text-anchor", "left")
+      .attr("x", function(d) {
+        return 1;
+      })
+      .attr("y", function(d, i) {
+        return i * (h / partyData.length - barPadding) + 20;
+      })
+      .attr("font-family", "Arial, Helvetica, sans-serif")
+      .attr("font-size", "12px")
+      .attr("fill", function(d) {
+        return d.colour;
+      }); */
+  }
 
   updateConstitData(constit_id, datatype, dataset) { 
 

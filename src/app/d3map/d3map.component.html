@@ -36,7 +36,22 @@
                         <strong>Swing:</strong> {{ constit.swing }}
                     </p>
 
-                    <div id="barChart"></div>
+                    
+                </div>
+                <div id="barChart"> 
+
+                    <div class="charty" style="opacity: 1;">
+                        <svg width="260" height="200" viewBox="0 0 260 200" perserveAspectRatio="xMinYMid" id="sizer-result" class="sizer">
+                            
+                            <rect *ngFor="let bar of barData" x="132" [style.y]="bar.y" [style.width]="bar.width" height="20" [style.fill]="bar.colour"></rect>
+                            
+                            <text *ngFor="let bar of barData; index as i" text-anchor="left" x="1" [attr.y]="bar.y + 15" font-family="Arial, Helvetica, sans-serif" font-size="15px" [style.fill]="bar.colour">
+                                {{ bar.party }}: {{ bar.result }}
+                            </text>
+
+                        </svg>
+                    </div>
+
                 </div>
             </div>
 
