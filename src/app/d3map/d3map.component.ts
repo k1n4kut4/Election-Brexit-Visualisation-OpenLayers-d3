@@ -20,8 +20,8 @@ import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 
 export class ConstitDataFields {
   constructor(
-    code_ons: any,
-    constit_name: string,
+    code_ons: string,
+    constit: string,
     region: string,
     mp_img: string,
     mp_name: string,

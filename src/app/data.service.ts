@@ -8,7 +8,7 @@ import * as ConstitData from '../assets/json/mp_details_full.json';
 export class ConstitDataFields {
   constructor(
     code_ons: any,
-    constit_name: any,
+    constit: any,
     region: any,
     mp_img: any,
     mp_name: any,
@@ -39,8 +39,7 @@ export class DataService {
 
   constructor() { }  
 
-  ngOnInit(){ 
-    //this.constitData = [];
+  ngOnInit(){  
   }
 
   getConstitData(id): Observable<ConstitDataFields[]> {
