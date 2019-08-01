@@ -18,7 +18,7 @@ import {Icon, Style} from 'ol/style';
 
 import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 
-export class ConstitData {
+export class ConstitDataFields {
   constructor(
     code_ons: string,
     constit: string,
@@ -99,21 +99,17 @@ export class D3mapComponent implements OnInit {
 
       let constit_id = this.map.forEachFeatureAtPixel(pixel, function(this, feature) {
         return feature.get('id') - 1;
-      });
-      
-      console.log(constit_id); 
+      }); 
 
-      console.log(this.updateConstitData(el, constit_id));
+      this.updateConstitData(el, constit_id);
     });
   } 
 
   updateConstitData(el, constit_id) { 
-    el.innerHTML = constit_id + '';
-
-    console.log(this.data.getConstitData(constit_id));
+    el.innerHTML = constit_id + ''; 
 
     this.data.getConstitData(constit_id).subscribe(
-      (res: ConstitData[]) => { 
+      (res: ConstitDataFields[]) => { 
         let constitData = res;
         console.log(constitData);
       },

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs'; 
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'; 
 import { of } from 'rxjs';
 
@@ -36,19 +35,19 @@ export class ConstitDataFields {
 })
 export class DataService {
 
-  constitData: ConstitDataFields[];
+  constitData: ConstitDataFields[] = [];
 
-  constructor(private http: HttpClient) { }  
+  constructor() { }  
+
+  ngOnInit(){ 
+    //this.constitData = [];
+  }
 
   getConstitData(id): Observable<ConstitDataFields[]> {
 
-    const cd = ConstitData;//.default;        
-    //this.constitData["constit_name"] = cd[id]["constit"];
-    //console.log(this.constitData); 
+    const cd = ConstitData["default"];  
+    this.constitData = cd[id]; 
 
-    this.constitData = cd;
-    
     return of(this.constitData);
-
-  }
+  } 
 }
