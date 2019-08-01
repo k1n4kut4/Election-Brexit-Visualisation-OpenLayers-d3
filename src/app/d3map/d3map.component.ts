@@ -109,10 +109,12 @@ export class D3mapComponent implements OnInit {
 
       let constit_id = this.map.forEachFeatureAtPixel(pixel, function(this, feature) {
         return feature.get('id') - 1;
-      }); 
+      });  
 
-      this.updateConstitData(constit_id, this.datatype, this.dataset);  
-
+      if(constit_id!=undefined){
+        this.updateConstitData(constit_id, this.datatype, this.dataset);   
+      }
+      
       if(this.constitData[0] != undefined){
         this.winnerColourWheel = this.getColourWheel(this.constitData[0]["win"]);
         this.chosenColour = this.getChosenColour();
@@ -196,7 +198,8 @@ export class D3mapComponent implements OnInit {
     return chosenColour;
   }
 
-  createBarChart(datatype){
+  createBarChart(datatype){ 
+
     // Barchart
     var barchart = d3.select("#barChart")
     .append("div")
@@ -219,7 +222,7 @@ export class D3mapComponent implements OnInit {
       .attr('id', "sizer-result")
       .attr('class', "sizer");
 
-      if(datatype="election"){
+      if(datatype=="election"){
 
         var partyData = [{
           "party": "CON",
@@ -289,19 +292,22 @@ export class D3mapComponent implements OnInit {
           });
         } 
         
-      }else if(datatype="petition"){
+      }else if(datatype=="petition"){
 
         var partyData = [{
-          "party": "For",
-          "result": parseInt(this.constitData[0]["for"]),
+          "party": "Signatures",
+          "result": parseInt(this.constitData[0]["signature_count"]),
           "colour": this.getColourWheel("con")
-        }, {
-          "party": "Against",
-          "result": parseInt(this.constitData[0]["against"]),
+        },
+        {
+          "party": "Abstained",
+          "result": parseInt(this.constitData[0]["abstained"]),
           "colour": this.getColourWheel("lab")
         }];
 
       }
+
+      console.log(partyData);
 
       var SortByResult = function(x, y) {
         return y.result - x.result;

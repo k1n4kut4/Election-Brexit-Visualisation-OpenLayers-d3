@@ -30,7 +30,9 @@ export class ConstitDataFields {
     snp: any,
     ukip: any,
     uup: any,
-    others: any) {}
+    others: any,
+    signature_count: any,
+    abstained: any) {}
 }
 
 @Injectable({
@@ -52,14 +54,41 @@ export class DataService {
     if(datatype == "election" && dataset == "2017"){
 
       cd = Election2017["default"];    
+
+      this.constitData = cd[id]; 
     
     }else if(datatype == "petition" && dataset == "brexit"){
-    
-      cd = PetitionBrexit["default"];  
-    
-    } 
 
-    this.constitData = cd[id]; 
+      let mp_data = Election2017["default"][id];
+      let code_ons = mp_data["code_ons"];  
+      let signatures_by_constituency = PetitionBrexit["default"]["data"]["attributes"]["signatures_by_constituency"];
+      
+      let filtered_signatures = signatures_by_constituency.filter(function (el) {
+        return el.ons_code == code_ons;
+      }); 
+
+      let abstainees = mp_data["electorate_size"]-filtered_signatures[0]["signature_count"];
+
+      let petition_win = "petition";
+
+      if(abstainees > filtered_signatures[0]["signature_count"]){
+        petition_win = "abstainees";
+      }
+
+      this.constitData = {
+        code_ons: mp_data["code_ons"],
+        constit: mp_data["constit"],
+        electorate_size: mp_data["electorate_size"],
+        mp_img: mp_data["mp_img"],
+        mp_name: mp_data["mp_name"],
+        others: mp_data["others"],
+        region: mp_data["region"],
+        signature_count: filtered_signatures[0]["signature_count"],
+        abstained: abstainees,
+        win: petition_win
+      };   
+
+    } 
 
     return of(this.constitData);
   } 
