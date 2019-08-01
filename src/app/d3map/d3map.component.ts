@@ -132,7 +132,7 @@ export class D3mapComponent implements OnInit {
       case "grn":
         colorWheel = "#7AB630";
         break;
-      case "plaid":
+      case "plc":
         colorWheel = "#3C862D";
         break;
       case "snp":
@@ -141,32 +141,8 @@ export class D3mapComponent implements OnInit {
       case "dup":
         colorWheel = "#FF9900";
         break;
-      case "other":
-        colorWheel = "gray";
-        break;
-      case "con":
-        colorWheel = "#0382AB";
-        break;
-      case "lab":
-        colorWheel = "#DA1502";
-        break;
-      case "ukip":
-        colorWheel = "#722889";
-        break;
-      case "lib":
-        colorWheel = "#FDB218";
-        break;
-      case "grn":
+      case "snf":
         colorWheel = "#7AB630";
-        break;
-      case "plaid":
-        colorWheel = "#3C862D";
-        break;
-      case "snp":
-        colorWheel = "#F0DE4C";
-        break;
-      case "dup":
-        colorWheel = "#FF9900";
         break;
       case "other":
         colorWheel = "gray";
