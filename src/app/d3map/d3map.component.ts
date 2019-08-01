@@ -147,7 +147,7 @@ export class D3mapComponent implements OnInit {
       case "snf":
         colorWheel = "#7AB630";
         break;
-      case "other":
+      case "oth":
         colorWheel = "gray";
         break; 
     }
