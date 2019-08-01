@@ -109,6 +109,40 @@ export class D3mapComponent implements OnInit {
     });
   } 
 
+  getChosenColour(){
+    var chosenColour; 
+    switch (this.constitData[0]["win"]) {
+        case "grn":
+          chosenColour = 0;
+          break;
+        case "lab":
+          chosenColour = 1;
+          break;
+        case "con":
+          chosenColour = 2;
+          break;
+        case "snp":
+          chosenColour = 3;
+          break;
+        case "plc":
+          chosenColour = 4;
+          break;
+        case "lib":
+          chosenColour = 5;
+          break;
+        case "ukip":
+          chosenColour = 9;
+          break;
+        case "dup":
+          chosenColour = 10;
+          break;
+        case "other":
+          chosenColour = 11;
+          break;
+    }
+    return chosenColour;
+  }
+
   createBarChart(){
     // Barchart
     var barchart = d3.select("#barChart")
@@ -199,7 +233,7 @@ export class D3mapComponent implements OnInit {
 
       var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]);
       
-      let chosenColour = 1;
+      let chosenColour = this.getChosenColour;
       var winner = chosenColour;
 
       barsvg.attr("width", w).attr("height", h).selectAll("rect")
@@ -218,7 +252,7 @@ export class D3mapComponent implements OnInit {
         .attr("height", h / partyData.length - barPadding)
         .attr("class", function(d, i) {
           if (i < 1) {
-            return "f" + winner;
+            return "f//" + winner;
           } else {
             return "lightbar";
           }
