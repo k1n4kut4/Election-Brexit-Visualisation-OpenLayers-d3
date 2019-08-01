@@ -6,8 +6,7 @@
 
         </mat-card-header>
         <mat-card-content *ngFor="let constit of constitData">    
-            
-            <div id="const_details" *ngIf="constit < 1">
+            <div id="const_details" *ngIf="constit ===undefined">
                 Scroll mouse over a constituency
             </div>
     
