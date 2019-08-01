@@ -20,7 +20,7 @@ import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 
 export class ConstitDataFields {
   constructor(
-    code_ons: string,
+    code_ons: any,
     constit_name: string,
     region: string,
     mp_img: string,
@@ -108,18 +108,22 @@ export class D3mapComponent implements OnInit {
   } 
 
   updateConstitData(el, constit_id) { 
-    el.innerHTML = ''; 
 
     this.data.getConstitData(constit_id).subscribe(
       (res: ConstitDataFields[]) => { 
         this.constitData = [];
-        this.constitData.push(res); 
+        if(res!==[]){ 
+          this.constitData.push(res);  
+          el.innerHTML = ''; 
+        }else{
+          el.innerHTML = 'Scroll mouse over a constituency';
+        }
       },
       (err) => {
         //this.error = err; 
       }
     );
     return this.constitData;
-  }
+  } 
 
 }

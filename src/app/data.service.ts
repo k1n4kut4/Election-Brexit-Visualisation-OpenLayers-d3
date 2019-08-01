@@ -45,8 +45,7 @@ export class DataService {
 
   getConstitData(id): Observable<ConstitDataFields[]> {
 
-    const cd = ConstitData["default"];  
-    console.log(cd.length);
+    const cd = ConstitData["default"];   
     this.constitData = cd[id]; 
 
     return of(this.constitData);
