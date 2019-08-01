@@ -10,7 +10,7 @@
             <div *ngFor="let constit of constitData">  
                 <div id="const_details" *ngIf="constit ===undefined">
                     Scroll mouse over a constituency
-                </div>
+                </div> 
         
                 <div *ngIf="constit !==undefined">
                     <p>{{ constit.region }}</p>
@@ -23,7 +23,7 @@
                     </p>
 
                     <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
-                    <p>
+                    <p *ngIf="datatype=='election'">
                         <strong>{{ constit.year }} status:</strong> {{ constit.stauts }}
                         <strong>Swing:</strong> {{ constit.swing }}
                     </p>
