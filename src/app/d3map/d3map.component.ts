@@ -106,10 +106,13 @@ export class D3mapComponent implements OnInit {
         return feature.get('id') - 1;
       }); 
 
-      this.updateConstitData(constit_id);
-      this.winnerColourWheel = this.getWinnerColourWheel();
-      this.chosenColour = this.getChosenColour();
-      this.createBarChart();
+      this.updateConstitData(constit_id);  
+
+      if(this.constitData[0] != undefined){
+        this.winnerColourWheel = this.getWinnerColourWheel();
+        this.chosenColour = this.getChosenColour();
+        this.createBarChart();
+      }
     });
   } 
 
