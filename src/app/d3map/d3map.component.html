@@ -4,12 +4,13 @@
         <mat-card-header>
             <mat-card-title>Details</mat-card-title>
 
-            <span id="const_details">
-                Scroll mouse over a constituency
-            </span>
-
         </mat-card-header>
         <mat-card-content *ngFor="let constit of constitData">   
+
+            {{ constit.mp_name }}
+            <div id="const_details" *ngIf="constit < 1">
+                Scroll mouse over a constituency
+            </div>
     
             <div *ngIf="constit !==undefined"> 
                 <p><strong>Constituency:</strong> {{ constit.constit_name }} ({{ constit.code_ons }})</p>
