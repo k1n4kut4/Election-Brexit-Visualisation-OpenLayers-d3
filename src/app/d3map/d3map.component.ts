@@ -95,8 +95,7 @@ export class D3mapComponent implements OnInit {
 
     this.map.on('pointermove', (browserEvent) => {  
       let coordinate = browserEvent.coordinate; 
-      let pixel = this.map.getPixelFromCoordinate(coordinate); 
-      let el = document.getElementById('const_details'); 
+      let pixel = this.map.getPixelFromCoordinate(coordinate);  
 
       let constit_id = this.map.forEachFeatureAtPixel(pixel, function(this, feature) {
         return feature.get('id') - 1;
