@@ -42,10 +42,12 @@ export class DataService {
   ngOnInit(){  
   }
 
-  getConstitData(id): Observable<ConstitDataFields[]> {
+  getConstitData(id, datatype, dataset): Observable<ConstitDataFields[]> {
 
-    const cd = ConstitData["default"];   
-    this.constitData = cd[id]; 
+    if(datatype == "election" && dataset == "2017"){
+      const cd = ConstitData["default"];   
+      this.constitData = cd[id]; 
+    }
 
     return of(this.constitData);
   } 

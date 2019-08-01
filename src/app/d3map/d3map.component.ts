@@ -111,17 +111,17 @@ export class D3mapComponent implements OnInit {
         return feature.get('id') - 1;
       }); 
 
-      this.updateConstitData(constit_id);  
+      this.updateConstitData(constit_id, this.datatype, this.dataset);  
 
       if(this.constitData[0] != undefined){
-        this.winnerColourWheel = this.getWinnerColourWheel(this.constitData[0]["win"]);
+        this.winnerColourWheel = this.getColourWheel(this.constitData[0]["win"]);
         this.chosenColour = this.getChosenColour();
-        this.createBarChart();
+        this.createBarChart(this.datatype);
       }
     });
   } 
 
-  getWinnerColourWheel(party){
+  getColourWheel(party){
     let colorWheel;
 
     switch (party) {
@@ -196,7 +196,7 @@ export class D3mapComponent implements OnInit {
     return chosenColour;
   }
 
-  createBarChart(){
+  createBarChart(datatype){
     // Barchart
     var barchart = d3.select("#barChart")
     .append("div")
@@ -219,73 +219,101 @@ export class D3mapComponent implements OnInit {
       .attr('id', "sizer-result")
       .attr('class', "sizer");
 
-      var partyData = [{
-        "party": "CON",
-        "result": parseInt(this.constitData[0]["con"]),
-        "colour": this.getWinnerColourWheel("con")
-      }, {
-        "party": "LAB",
-        "result": parseInt(this.constitData[0]["lab"]),
-        "colour": this.getWinnerColourWheel("lab")
-      }, {
-        "party": "LIB",
-        "result": parseInt(this.constitData[0]["lib"]),
-        "colour": this.getWinnerColourWheel("lib")
-      }, {
-        "party": "UKIP",
-        "result": parseInt(this.constitData[0]["ukip"]),
-        "colour": this.getWinnerColourWheel("ukip")
-      }, {
-        "party": "GREEN",
-        "result": parseInt(this.constitData[0]["grn"]),
-        "colour": this.getWinnerColourWheel("grn")
-      }];
+      if(datatype="election"){
 
-      //region parties
+        var partyData = [{
+          "party": "CON",
+          "result": parseInt(this.constitData[0]["con"]),
+          "colour": this.getColourWheel("con")
+        }, {
+          "party": "LAB",
+          "result": parseInt(this.constitData[0]["lab"]),
+          "colour": this.getColourWheel("lab")
+        }, {
+          "party": "LIB",
+          "result": parseInt(this.constitData[0]["lib"]),
+          "colour": this.getColourWheel("lib")
+        }, {
+          "party": "UKIP",
+          "result": parseInt(this.constitData[0]["ukip"]),
+          "colour": this.getColourWheel("ukip")
+        }, {
+          "party": "GREEN",
+          "result": parseInt(this.constitData[0]["grn"]),
+          "colour": this.getColourWheel("grn")
+        }];
 
-      let whatregion = this.constitData[0]["region"];
+        //region parties
 
-      switch (whatregion) { 
-        case "Scotland":
+        let whatregion = this.constitData[0]["region"];
+
+        switch (whatregion) { 
+          case "Scotland":
+            partyData.push({
+              "party": "SNP",
+              "result": parseInt(this.constitData[0]["snp"]),
+              "colour": this.getColourWheel("snp")
+            });
+            break;
+          case "Northern Ireland":
+            partyData.push({
+              "party": "DUP",
+              "result": parseInt(this.constitData[0]["dup"]),
+              "colour": this.getColourWheel("dup")
+            });
+            partyData.push({
+              "party": "UUP",
+              "result": parseInt(this.constitData[0]["uup"]),
+              "colour": this.getColourWheel("uup")
+            });
+            partyData.push({
+              "party": "SF",
+              "result": parseInt(this.constitData[0]["sf"]),
+              "colour": this.getColourWheel("snf")
+            });
+            break;
+        }
+
+        //State data puts PlaidC in "others"
+        if(whatregion=="Wales"){
           partyData.push({
-            "party": "SNP",
-            "result": parseInt(this.constitData[0]["snp"]),
-            "colour": this.getWinnerColourWheel("snp")
+            "party": "OTHER(S), e.g. Plaid",
+            "result": parseInt(this.constitData[0]["others"]),
+            "colour": this.getColourWheel("plc")
           });
-          break;
-        case "Northern Ireland":
+        }else{   
           partyData.push({
-            "party": "DUP",
-            "result": parseInt(this.constitData[0]["dup"]),
-            "colour": this.getWinnerColourWheel("dup")
+            "party": "OTHER(S)",
+            "result": parseInt(this.constitData[0]["others"]),
+            "colour": this.getColourWheel("oth")
           });
-          partyData.push({
-            "party": "UUP",
-            "result": parseInt(this.constitData[0]["uup"]),
-            "colour": this.getWinnerColourWheel("uup")
-          });
-          partyData.push({
-            "party": "SF",
-            "result": parseInt(this.constitData[0]["sf"]),
-            "colour": this.getWinnerColourWheel("snf")
-          });
-          break;
+        } 
+        
+      }else if(datatype="petition"){
+
+        var partyData = [{
+          "party": "CON",
+          "result": parseInt(this.constitData[0]["con"]),
+          "colour": this.getColourWheel("con")
+        }, {
+          "party": "LAB",
+          "result": parseInt(this.constitData[0]["lab"]),
+          "colour": this.getColourWheel("lab")
+        }, {
+          "party": "LIB",
+          "result": parseInt(this.constitData[0]["lib"]),
+          "colour": this.getColourWheel("lib")
+        }, {
+          "party": "UKIP",
+          "result": parseInt(this.constitData[0]["ukip"]),
+          "colour": this.getColourWheel("ukip")
+        }, {
+          "party": "GREEN",
+          "result": parseInt(this.constitData[0]["grn"]),
+          "colour": this.getColourWheel("grn")
+        }];
+
       }
-
-      //State data puts PlaidC in "others"
-      if(whatregion=="Wales"){
-        partyData.push({
-          "party": "OTHER(S), e.g. Plaid",
-          "result": parseInt(this.constitData[0]["others"]),
-          "colour": this.getWinnerColourWheel("plc")
-        });
-      }else{   
-        partyData.push({
-          "party": "OTHER(S)",
-          "result": parseInt(this.constitData[0]["others"]),
-          "colour": this.getWinnerColourWheel("oth")
-        });
-      } 
 
       var SortByResult = function(x, y) {
         return y.result - x.result;
@@ -340,9 +368,9 @@ export class D3mapComponent implements OnInit {
         });
 }
 
-  updateConstitData(constit_id) { 
+  updateConstitData(constit_id, datatype, dataset) { 
 
-    this.data.getConstitData(constit_id).subscribe(
+    this.data.getConstitData(constit_id, datatype, dataset).subscribe(
       (res: ConstitDataFields[]) => { 
         this.constitData = [];
         if(res!==[]){ 
