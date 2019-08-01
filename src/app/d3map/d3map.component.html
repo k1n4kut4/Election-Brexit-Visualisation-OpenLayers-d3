@@ -17,16 +17,19 @@
                     <p>{{ constit.region }}</p>
 
                     <img src="{{ constit.mp_img }}"> 
-                    <p><strong>MP Name:</strong> {{ constit.mp_name }}</p> 
-                    <p><strong>Party:</strong> {{ constit.win }}</p>
+                    <p>
+                        <strong>MP Name:</strong> {{ constit.mp_name }} ({{ constit.win }}) 
+                    </p>
 
                     <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
-                    <p><strong>{{ constit.year }} status:</strong> {{ constit.stauts }}</p>
-                    <p><strong>Swing:</strong> {{ constit.swing }}</p>
+                    <p>
+                        <strong>{{ constit.year }} status:</strong> {{ constit.stauts }}
+                        <strong>Swing:</strong> {{ constit.swing }}
+                    </p>
+
+                    <div id="barChart"></div>
                 </div>
             </div>
-            
-            <div id="barChart"></div>
 
         </mat-card-content> 
     </mat-card>
