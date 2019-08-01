@@ -109,17 +109,17 @@ export class D3mapComponent implements OnInit {
       this.updateConstitData(constit_id);  
 
       if(this.constitData[0] != undefined){
-        this.winnerColourWheel = this.getWinnerColourWheel();
+        this.winnerColourWheel = this.getWinnerColourWheel(this.constitData[0]["win"]);
         this.chosenColour = this.getChosenColour();
         this.createBarChart();
       }
     });
   } 
 
-  getWinnerColourWheel(){
+  getWinnerColourWheel(party){
     let colorWheel;
 
-    switch (this.constitData[0]["win"]) {
+    switch (party) {
       case "con":
         colorWheel = "#0382AB";
         break;
@@ -216,19 +216,24 @@ export class D3mapComponent implements OnInit {
 
       var partyData = [{
         "party": "CON",
-        "result": parseInt(this.constitData[0]["con"])
+        "result": parseInt(this.constitData[0]["con"]),
+        "colour": this.getWinnerColourWheel("con")
       }, {
         "party": "LAB",
-        "result": parseInt(this.constitData[0]["lab"])
+        "result": parseInt(this.constitData[0]["lab"]),
+        "colour": this.getWinnerColourWheel("lab")
       }, {
         "party": "LIB",
-        "result": parseInt(this.constitData[0]["lib"])
+        "result": parseInt(this.constitData[0]["lib"]),
+        "colour": this.getWinnerColourWheel("lib")
       }, {
         "party": "UKIP",
-        "result": parseInt(this.constitData[0]["ukip"])
+        "result": parseInt(this.constitData[0]["ukip"]),
+        "colour": this.getWinnerColourWheel("ukip")
       }, {
         "party": "GREEN",
-        "result": parseInt(this.constitData[0]["grn"])
+        "result": parseInt(this.constitData[0]["grn"]),
+        "colour": this.getWinnerColourWheel("grn")
       }];
 
       //region parties
@@ -239,21 +244,25 @@ export class D3mapComponent implements OnInit {
         case "Scotland":
           partyData.push({
             "party": "SNP",
-            "result": parseInt(this.constitData[0]["snp"])
+            "result": parseInt(this.constitData[0]["snp"]),
+            "colour": this.getWinnerColourWheel("snp")
           });
           break;
         case "Northern Ireland":
           partyData.push({
             "party": "DUP",
-            "result": parseInt(this.constitData[0]["dup"])
+            "result": parseInt(this.constitData[0]["dup"]),
+            "colour": this.getWinnerColourWheel("dup")
           });
           partyData.push({
             "party": "UUP",
-            "result": parseInt(this.constitData[0]["uup"])
+            "result": parseInt(this.constitData[0]["uup"]),
+            "colour": this.getWinnerColourWheel("uup")
           });
           partyData.push({
             "party": "SF",
-            "result": parseInt(this.constitData[0]["sf"])
+            "result": parseInt(this.constitData[0]["sf"]),
+            "colour": this.getWinnerColourWheel("snf")
           });
           break;
       }
@@ -262,12 +271,14 @@ export class D3mapComponent implements OnInit {
       if(whatregion=="Wales"){
         partyData.push({
           "party": "OTHER(S), e.g. Plaid",
-          "result": parseInt(this.constitData[0]["others"])
+          "result": parseInt(this.constitData[0]["others"]),
+          "colour": this.getWinnerColourWheel("plc")
         });
       }else{   
         partyData.push({
           "party": "OTHER(S)",
-          "result": parseInt(this.constitData[0]["others"])
+          "result": parseInt(this.constitData[0]["others"]),
+          "colour": this.getWinnerColourWheel("oth")
         });
       } 
 
@@ -297,12 +308,8 @@ export class D3mapComponent implements OnInit {
           return barx(d.result);
         })
         .attr("height", h / partyData.length - barPadding)
-        .attr("class", function(d, i) {
-          if (i < 1) {
-            return "f" + winner;
-          } else {
-            return "lightbar";
-          }
+        .attr("style", function(d) {
+          return "fill: " + d.colour;
         });
 
       barsvg.selectAll("text")
@@ -323,7 +330,9 @@ export class D3mapComponent implements OnInit {
         })
         .attr("font-family", "Arial, Helvetica, sans-serif")
         .attr("font-size", "12px")
-        .attr("fill", "black");
+        .attr("fill", function(d) {
+          return d.colour;
+        });
 }
 
   updateConstitData(constit_id) { 
