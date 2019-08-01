@@ -88,7 +88,7 @@ export class D3mapComponent implements OnInit {
       target: 'map',
       layers: [ this.rasterLayer, this.topoJSONLayer ],
       view: new View({
-        center: fromLonLat([-0.75583, 54.04172]),
+        center: fromLonLat([-1.32583, 53.04172]),
         zoom: 7
       })
     });
