@@ -299,7 +299,7 @@ export class D3mapComponent implements OnInit {
         .attr("height", h / partyData.length - barPadding)
         .attr("class", function(d, i) {
           if (i < 1) {
-            return "f//" + winner;
+            return "f" + winner;
           } else {
             return "lightbar";
           }

@@ -20,6 +20,64 @@
 
         #barChart {
             height: 200px;
+
+            .charty{ 
+
+                .sizer{  
+
+                    rect{
+                        fill: #DA1502;
+                    }
+
+                    .f0 {
+                        fill: #222222
+                    }
+                
+                    .f1 {
+                        fill: #DA1502
+                    }
+                
+                    .f2 {
+                        fill: #0382AB
+                    }
+                
+                    .f3 {
+                        fill: #F0DE4C
+                    }
+                
+                    .f4 {
+                        fill: #3C862D
+                    }
+                
+                    .f5 {
+                        fill: #FDB218
+                    }
+                
+                    .f6 {
+                        fill: #df1c41
+                    }
+                
+                    .f7 {
+                        fill: #7AB630
+                    }
+                
+                    .f8 {
+                        fill: #999999;
+                    }
+                
+                    .f9 {
+                        fill: #722889
+                    }
+                
+                    .f10 {
+                        fill: #FF9900
+                    }
+                
+                    .f11, .fundefined {
+                        fill: gray;
+                    }
+                }
+            }    
         }
     }
 }
