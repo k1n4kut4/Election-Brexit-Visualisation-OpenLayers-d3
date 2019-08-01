@@ -108,7 +108,7 @@ export class D3mapComponent implements OnInit {
   } 
 
   updateConstitData(el, constit_id) { 
-    el.innerHTML = constit_id + ''; 
+    el.innerHTML = ''; 
 
     this.data.getConstitData(constit_id).subscribe(
       (res: ConstitDataFields[]) => { 
