@@ -2,6 +2,8 @@
 
 GIS project - without political intent. Render of d3 JavaScript chart map within TypeScript Angular 8. Brexit ref results neutrally displayed; constituencies colour-coded by result. Hover shows local MP.
 
+![preview](./readme_imgs/img1.png)  
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
 ## Development server
