@@ -159,6 +159,12 @@ export class D3mapComponent implements OnInit {
       case "oth":
         colorWheel = "gray";
         break; 
+      case "petition":
+        colorWheel = "#7AB630";
+        break;
+      case "abstainees":
+        colorWheel = "#DA1502";
+        break;
     }
 
     return colorWheel;
