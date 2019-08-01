@@ -173,36 +173,38 @@ export class D3mapComponent implements OnInit {
 
     if(datatype=="election"){
 
+      let electorate_size = parseInt(this.constitData[0]["electorate_size"]);
+
       var partyData = [{
         "party": "CON",
         "result": parseInt(this.constitData[0]["con"]),
         "colour": this.getColourWheel("con"),
         "y": 25,
-        "width": 0
+        "width": 200 * (parseInt(this.constitData[0]["con"]) / electorate_size ) 
       }, {
         "party": "LAB",
         "result": parseInt(this.constitData[0]["lab"]),
         "colour": this.getColourWheel("lab"),
         "y": 50,
-        "width": 0
+        "width": 200 * (parseInt(this.constitData[0]["lab"]) / electorate_size ) 
       }, {
         "party": "LIB",
         "result": parseInt(this.constitData[0]["lib"]),
         "colour": this.getColourWheel("lib"),
         "y": 75,
-        "width": 0
+        "width": 200 * (parseInt(this.constitData[0]["lib"]) / electorate_size ) 
       }, {
         "party": "UKIP",
         "result": parseInt(this.constitData[0]["ukip"]),
         "colour": this.getColourWheel("ukip"),
         "y": 100,
-        "width": 0
+        "width": 200 * (parseInt(this.constitData[0]["ukip"]) / electorate_size ) 
       }, {
         "party": "GREEN",
         "result": parseInt(this.constitData[0]["grn"]),
         "colour": this.getColourWheel("grn"),
         "y": 125,
-        "width": 0
+        "width": 200 * (parseInt(this.constitData[0]["grn"]) / electorate_size ) 
       }];
 
       //region parties
@@ -217,7 +219,7 @@ export class D3mapComponent implements OnInit {
             "result": parseInt(this.constitData[0]["snp"]),
             "colour": this.getColourWheel("snp"),
             "y": 150,
-            "width": 0
+            "width": 200 * (parseInt(this.constitData[0]["snp"]) / electorate_size ) 
           });
           finalBarY = 175;
           break;
@@ -227,21 +229,21 @@ export class D3mapComponent implements OnInit {
             "result": parseInt(this.constitData[0]["dup"]),
             "colour": this.getColourWheel("dup"),
             "y": 150,
-            "width": 0
+            "width": 200 * (parseInt(this.constitData[0]["dup"]) / electorate_size ) 
           });
           partyData.push({
             "party": "UUP",
             "result": parseInt(this.constitData[0]["uup"]),
             "colour": this.getColourWheel("uup"),
             "y": 175,
-            "width": 0
+            "width": 200 * (parseInt(this.constitData[0]["uup"]) / electorate_size ) 
           });
           partyData.push({
             "party": "SF",
             "result": parseInt(this.constitData[0]["sf"]),
             "colour": this.getColourWheel("snf"),
             "y": 200,
-            "width": 0
+            "width": 200 * (parseInt(this.constitData[0]["snf"]) / electorate_size ) 
           });
           finalBarY = 255;
           break;
@@ -254,7 +256,7 @@ export class D3mapComponent implements OnInit {
           "result": parseInt(this.constitData[0]["others"]),
           "colour": this.getColourWheel("plc"),
           "y": 150,
-          "width": 0
+          "width": 200 * (parseInt(this.constitData[0]["plc"]) / electorate_size ) 
         });
         finalBarY = 175;
       }else{   
@@ -263,7 +265,7 @@ export class D3mapComponent implements OnInit {
           "result": parseInt(this.constitData[0]["others"]),
           "colour": this.getColourWheel("oth"),
           "y": finalBarY,
-          "width": 0
+          "width": 200 * (parseInt(this.constitData[0]["oth"]) / electorate_size ) 
         });
       } 
       
