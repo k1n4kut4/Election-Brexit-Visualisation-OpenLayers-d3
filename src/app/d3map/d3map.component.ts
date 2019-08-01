@@ -149,6 +149,46 @@ export class D3mapComponent implements OnInit {
         "result": parseInt(this.constitData[0]["grn"])
       }];
 
+      //region parties
+
+      let whatregion = this.constitData[0]["region"];
+
+      switch (whatregion) { 
+        case "Scotland":
+          partyData.push({
+            "party": "SNP",
+            "result": parseInt(this.constitData[0]["snp"])
+          });
+          break;
+        case "Northern Ireland":
+          partyData.push({
+            "party": "DUP",
+            "result": parseInt(this.constitData[0]["dup"])
+          });
+          partyData.push({
+            "party": "UUP",
+            "result": parseInt(this.constitData[0]["uup"])
+          });
+          partyData.push({
+            "party": "SF",
+            "result": parseInt(this.constitData[0]["sf"])
+          });
+          break;
+      }
+
+      //State data puts PlaidC in "others"
+      if(whatregion=="Wales"){
+        partyData.push({
+          "party": "OTHER(S), e.g. Plaid",
+          "result": parseInt(this.constitData[0]["others"])
+        });
+      }else{   
+        partyData.push({
+          "party": "OTHER(S)",
+          "result": parseInt(this.constitData[0]["others"])
+        });
+      } 
+
       var SortByResult = function(x, y) {
         return y.result - x.result;
       }; 
