@@ -177,37 +177,38 @@ export class D3mapComponent implements OnInit {
         "party": "CON",
         "result": parseInt(this.constitData[0]["con"]),
         "colour": this.getColourWheel("con"),
-        "y": 0,
+        "y": 25,
         "width": 0
       }, {
         "party": "LAB",
         "result": parseInt(this.constitData[0]["lab"]),
         "colour": this.getColourWheel("lab"),
-        "y": 0,
+        "y": 50,
         "width": 0
       }, {
         "party": "LIB",
         "result": parseInt(this.constitData[0]["lib"]),
         "colour": this.getColourWheel("lib"),
-        "y": 0,
+        "y": 75,
         "width": 0
       }, {
         "party": "UKIP",
         "result": parseInt(this.constitData[0]["ukip"]),
         "colour": this.getColourWheel("ukip"),
-        "y": 0,
+        "y": 100,
         "width": 0
       }, {
         "party": "GREEN",
         "result": parseInt(this.constitData[0]["grn"]),
         "colour": this.getColourWheel("grn"),
-        "y": 0,
+        "y": 125,
         "width": 0
       }];
 
       //region parties
 
       let whatregion = this.constitData[0]["region"];
+      let finalBarY = 150;
 
       switch (whatregion) { 
         case "Scotland":
@@ -215,32 +216,34 @@ export class D3mapComponent implements OnInit {
             "party": "SNP",
             "result": parseInt(this.constitData[0]["snp"]),
             "colour": this.getColourWheel("snp"),
-            "y": 0,
+            "y": 150,
             "width": 0
           });
+          finalBarY = 175;
           break;
         case "Northern Ireland":
           partyData.push({
             "party": "DUP",
             "result": parseInt(this.constitData[0]["dup"]),
             "colour": this.getColourWheel("dup"),
-            "y": 0,
+            "y": 150,
             "width": 0
           });
           partyData.push({
             "party": "UUP",
             "result": parseInt(this.constitData[0]["uup"]),
             "colour": this.getColourWheel("uup"),
-            "y": 0,
+            "y": 175,
             "width": 0
           });
           partyData.push({
             "party": "SF",
             "result": parseInt(this.constitData[0]["sf"]),
             "colour": this.getColourWheel("snf"),
-            "y": 0,
+            "y": 200,
             "width": 0
           });
+          finalBarY = 255;
           break;
       }
 
@@ -250,15 +253,16 @@ export class D3mapComponent implements OnInit {
           "party": "OTHER(S), e.g. Plaid",
           "result": parseInt(this.constitData[0]["others"]),
           "colour": this.getColourWheel("plc"),
-          "y": 0,
+          "y": 150,
           "width": 0
         });
+        finalBarY = 175;
       }else{   
         partyData.push({
           "party": "OTHER(S)",
           "result": parseInt(this.constitData[0]["others"]),
           "colour": this.getColourWheel("oth"),
-          "y": 0,
+          "y": finalBarY,
           "width": 0
         });
       } 
