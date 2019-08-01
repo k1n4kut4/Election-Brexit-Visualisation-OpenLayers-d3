@@ -60,6 +60,8 @@ export class D3mapComponent implements OnInit {
   key: any;
   constit: ConstitDataFields = "";
   constitData = [];
+  chosenColour: any;
+  winnerColourWheel: any;
 
   constructor(private data: DataService) {}
 
@@ -105,12 +107,78 @@ export class D3mapComponent implements OnInit {
       }); 
 
       this.updateConstitData(constit_id);
+      this.winnerColourWheel = this.getWinnerColourWheel();
+      this.chosenColour = this.getChosenColour();
       this.createBarChart();
     });
   } 
 
+  getWinnerColourWheel(){
+    let colorWheel;
+
+    switch (this.constitData[0]["win"]) {
+      case "con":
+        colorWheel = "#0382AB";
+        break;
+      case "lab":
+        colorWheel = "#DA1502";
+        break;
+      case "ukip":
+        colorWheel = "#722889";
+        break;
+      case "lib":
+        colorWheel = "#FDB218";
+        break;
+      case "grn":
+        colorWheel = "#7AB630";
+        break;
+      case "plaid":
+        colorWheel = "#3C862D";
+        break;
+      case "snp":
+        colorWheel = "#F0DE4C";
+        break;
+      case "dup":
+        colorWheel = "#FF9900";
+        break;
+      case "other":
+        colorWheel = "gray";
+        break;
+      case "con":
+        colorWheel = "#0382AB";
+        break;
+      case "lab":
+        colorWheel = "#DA1502";
+        break;
+      case "ukip":
+        colorWheel = "#722889";
+        break;
+      case "lib":
+        colorWheel = "#FDB218";
+        break;
+      case "grn":
+        colorWheel = "#7AB630";
+        break;
+      case "plaid":
+        colorWheel = "#3C862D";
+        break;
+      case "snp":
+        colorWheel = "#F0DE4C";
+        break;
+      case "dup":
+        colorWheel = "#FF9900";
+        break;
+      case "other":
+        colorWheel = "gray";
+        break; 
+    }
+
+    return colorWheel;
+  }
+
   getChosenColour(){
-    var chosenColour; 
+    let chosenColour = 0; 
+
     switch (this.constitData[0]["win"]) {
         case "grn":
           chosenColour = 0;
@@ -140,6 +208,7 @@ export class D3mapComponent implements OnInit {
           chosenColour = 11;
           break;
     }
+
     return chosenColour;
   }
 
@@ -232,9 +301,8 @@ export class D3mapComponent implements OnInit {
       });
 
       var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]);
-      
-      let chosenColour = this.getChosenColour;
-      var winner = chosenColour;
+
+      var winner = this.chosenColour;
 
       barsvg.attr("width", w).attr("height", h).selectAll("rect")
         .data(partyData.sort(SortByResult).filter(function(d) {

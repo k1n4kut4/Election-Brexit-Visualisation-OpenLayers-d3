@@ -12,12 +12,12 @@
                     Scroll mouse over a constituency
                 </div>
         
-                <div *ngIf="constit !==undefined"> 
+                <div *ngIf="constit !==undefined">
                     <p><strong>Constituency:</strong> {{ constit.constit }} ({{ constit.code_ons }})</p>
                     <p>{{ constit.region }}</p>
 
                     <img src="{{ constit.mp_img }}"> 
-                    <p>
+                    <p [style.background]="colorWheel">
                         <strong>MP Name:</strong> {{ constit.mp_name }} ({{ constit.win }}) 
                     </p>
 
