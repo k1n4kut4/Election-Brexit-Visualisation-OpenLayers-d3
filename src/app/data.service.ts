@@ -3,7 +3,10 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators'; 
 import { of } from 'rxjs';
 
-import * as ConstitData from '../assets/json/mp_details_full.json'; 
+import * as Election2017 from '../assets/json/mp_details_full.json'; 
+import * as Election0 from '../assets/json/election-data.json'; 
+import * as ConstitONS from '../assets/json/constit_ons.json'; 
+import * as PetitionBrexit from '../assets/json/petitions-241584.json'; 
 
 export class ConstitDataFields {
   constructor(
@@ -44,10 +47,19 @@ export class DataService {
 
   getConstitData(id, datatype, dataset): Observable<ConstitDataFields[]> {
 
+    let cd = [];
+
     if(datatype == "election" && dataset == "2017"){
-      const cd = ConstitData["default"];   
-      this.constitData = cd[id]; 
-    }
+
+      cd = Election2017["default"];    
+    
+    }else if(datatype == "petition" && dataset == "brexit"){
+    
+      cd = PetitionBrexit["default"];  
+    
+    } 
+
+    this.constitData = cd[id]; 
 
     return of(this.constitData);
   } 

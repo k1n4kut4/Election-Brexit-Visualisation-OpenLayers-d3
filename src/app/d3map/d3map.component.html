@@ -24,7 +24,8 @@
 
                     <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
                     <p *ngIf="datatype=='election'">
-                        <strong>{{ constit.year }} status:</strong> {{ constit.stauts }}
+                        <strong>{{ constit.year }} status:</strong> {{ constit.status }}
+                        &nbsp;
                         <strong>Swing:</strong> {{ constit.swing }}
                     </p>
 

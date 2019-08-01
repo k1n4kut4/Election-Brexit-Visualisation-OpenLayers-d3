@@ -292,25 +292,13 @@ export class D3mapComponent implements OnInit {
       }else if(datatype="petition"){
 
         var partyData = [{
-          "party": "CON",
-          "result": parseInt(this.constitData[0]["con"]),
+          "party": "For",
+          "result": parseInt(this.constitData[0]["for"]),
           "colour": this.getColourWheel("con")
         }, {
-          "party": "LAB",
-          "result": parseInt(this.constitData[0]["lab"]),
+          "party": "Against",
+          "result": parseInt(this.constitData[0]["against"]),
           "colour": this.getColourWheel("lab")
-        }, {
-          "party": "LIB",
-          "result": parseInt(this.constitData[0]["lib"]),
-          "colour": this.getColourWheel("lib")
-        }, {
-          "party": "UKIP",
-          "result": parseInt(this.constitData[0]["ukip"]),
-          "colour": this.getColourWheel("ukip")
-        }, {
-          "party": "GREEN",
-          "result": parseInt(this.constitData[0]["grn"]),
-          "colour": this.getColourWheel("grn")
         }];
 
       }
