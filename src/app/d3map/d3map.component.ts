@@ -21,7 +21,7 @@ import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 export class ConstitDataFields {
   constructor(
     code_ons: string,
-    constit: string,
+    constit_name: string,
     region: string,
     mp_img: string,
     mp_name: string,
@@ -55,6 +55,8 @@ export class D3mapComponent implements OnInit {
   topoJSONLayer;
   rasterLayer; 
   key: any;
+  constit: ConstitDataFields = "";
+  constitData = [];
 
   constructor(private data: DataService) {}
 
@@ -110,13 +112,14 @@ export class D3mapComponent implements OnInit {
 
     this.data.getConstitData(constit_id).subscribe(
       (res: ConstitDataFields[]) => { 
-        let constitData = res;
-        console.log(constitData);
+        this.constitData = [];
+        this.constitData.push(res); 
       },
       (err) => {
         //this.error = err; 
       }
     );
+    return this.constitData;
   }
 
 }

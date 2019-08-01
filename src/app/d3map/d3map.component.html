@@ -3,12 +3,17 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>  
 
-            <div id="const_details" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="center">
+            <span id="const_details">
                 Scroll mouse over a constituency
-            </div>
+            </span>
+        </mat-card-header>
+        <mat-card-content *ngFor="let constit of constitData">  
+    
+            <p><strong>Constituency:</strong> {{ constit.constit_name }}</p>
+           
+            <img src="{{ constit.mp_img }}"> 
+            <p><strong>MP Name:</strong> {{ constit.mp_name }}</p>
 
         </mat-card-content> 
     </mat-card>
