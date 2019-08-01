@@ -291,12 +291,6 @@ export class D3mapComponent implements OnInit {
       return y.result - x.result;
     }; 
 
-    var max = d3.max(partyData, function(d) {
-      return d.result;
-    });
-
-    var barx = d3Scale.scaleLinear().domain([0, max]).range([0, 160]); 
-
     // Barchart
     var barchart = d3.select("#barChart")
     .append("div")
@@ -306,13 +300,7 @@ export class D3mapComponent implements OnInit {
 
     //Width and height of barchart
     var w = 260,
-      h = 200,
-      barPadding = 1;
-
-    console.log("----------"); 
-    console.log(this.constitData);
-    console.log(d3.select("#barChart"));
-    console.log(barchart);
+      h = 200;
 
     //Create bar chart
     var barsvg = barchart
@@ -332,52 +320,6 @@ export class D3mapComponent implements OnInit {
     .attr("y", function(d, i) {
       return i * (h / partyData.length);
     });
-
-    /* barsvg.selectAll("rect").remove();  
-
-    console.log(barsvg);
-
-    barsvg.attr("width", w).attr("height", h)
-    .selectAll("rect")
-      .data(partyData.sort(SortByResult).filter(function(d) {
-        console.log(d);
-        return d.result !== 0;
-      }))
-      .enter()
-      .append("rect")
-      .attr("x", 100)
-      .attr("y", function(d, i) {
-        return i * (h / partyData.length);
-      })
-      .attr("width", function(d, i) {
-        return barx(d.result);
-      })
-      .attr("height", h / partyData.length - barPadding)
-      .attr("style", function(d) {
-        return "fill: " + d.colour;
-      });
-
-    barsvg.selectAll("text")
-      .data(partyData.sort(SortByResult).filter(function(d) {
-        return d.result !== 0;
-      }))
-      .enter()
-      .append("text")
-      .text(function(d) {
-        return d.party + ": " + d.result;
-      })
-      .attr("text-anchor", "left")
-      .attr("x", function(d) {
-        return 1;
-      })
-      .attr("y", function(d, i) {
-        return i * (h / partyData.length - barPadding) + 20;
-      })
-      .attr("font-family", "Arial, Helvetica, sans-serif")
-      .attr("font-size", "12px")
-      .attr("fill", function(d) {
-        return d.colour;
-      }); */
   }
 
   updateConstitData(constit_id, datatype, dataset) { 
