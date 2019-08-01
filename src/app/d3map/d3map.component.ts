@@ -54,6 +54,7 @@ export class ConstitDataFields {
 })
 export class D3mapComponent implements OnInit {  
   dataset: any;
+  datatype: any;
   map; 
   vectorSource;
   vectorLayer;
@@ -68,6 +69,7 @@ export class D3mapComponent implements OnInit {
   constructor(private route: ActivatedRoute, private data: DataService) {}
 
   ngOnInit() {  
+    this.datatype = this.route.snapshot.paramMap.get('datatype'); 
     this.dataset = this.route.snapshot.paramMap.get('dataset'); 
     this.key = MAPBOX_CONFIG["MAPBOX_CONFIG"];
     this.initilizeMap();
