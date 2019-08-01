@@ -22,7 +22,14 @@
                         <strong>MP Name:</strong> {{ constit.mp_name }} ({{ constit.win }}) 
                     </p>
 
-                    <p><strong>{{ constit.votes }}</strong> of {{ constit.electorate_size }} electorate pop.</p>
+                    <p *ngIf="datatype=='petition'">
+                        <strong>{{ constit.signature_count }} signatures</strong> of {{ constit.electorate_size }} electorate pop.
+                    </p>
+
+                    <p *ngIf="datatype=='election'">
+                        <strong>{{ constit.votes }} votes</strong> of {{ constit.electorate_size }} electorate pop.
+                    </p>
+                    
                     <p *ngIf="datatype=='election'">
                         <strong>{{ constit.year }} status:</strong> {{ constit.status }}
                         &nbsp;

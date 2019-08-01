@@ -44,7 +44,9 @@ export class ConstitDataFields {
     snp: string,
     ukip: string,
     uup: string,
-    others: string) {}
+    others: string,
+    signature_count: any,
+    abstained: any) {}
 }
 
 @Component({
