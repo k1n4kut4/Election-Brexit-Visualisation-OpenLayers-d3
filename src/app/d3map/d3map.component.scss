@@ -18,9 +18,15 @@
             width: 90%;
         }
 
-        #mp_name{
-            padding: 10px;
-            color: #fff;
+        #mp_details {
+            img {
+                min-height: 200px;
+            }
+
+            #mp_name{
+                padding: 10px;
+                color: #fff;
+            }
         }
 
         #barChart {
