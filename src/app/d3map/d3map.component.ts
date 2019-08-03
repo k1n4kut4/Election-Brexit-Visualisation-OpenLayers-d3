@@ -111,11 +111,11 @@ export class D3mapComponent implements OnInit {
 
           return new Style({
               stroke: new Stroke({
-                  colour: '#f2f2f2',
+                  color: '#f2f2f2',
                   width: 1
               }),
               fill: new Fill({
-                  colour: colourWheel, 
+                  color: colourWheel, 
                   width: 1
               })
           });
