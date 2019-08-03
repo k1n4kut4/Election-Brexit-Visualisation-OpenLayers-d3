@@ -97,16 +97,22 @@ export class D3mapComponent implements OnInit {
         }),
         overlaps: false
       }),
-      style: function(feature) {
-          let id = feature.get('id');
-          console.log(id);
+      style: (feature) => { 
+          let id = feature.get('id') - 1;
+
+          let constitData = this.updateConstitData(id,this.datatype,this.dataset);  
+
+          let winner = constitData[0]["win"];   
+          
+          let colourWheel = this.getColourWheel(winner); 
+
           return new Style({
               stroke: new Stroke({
                   color: '#09a7ee',
                   width: 1
               }),
               fill: new Fill({
-                  color: '#fff',
+                  color: colourWheel, 
                   width: 1
               })
           });
@@ -161,7 +167,7 @@ export class D3mapComponent implements OnInit {
 
   capitaliseFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  } 
 
   getColourWheel(party){
     let colorWheel;
