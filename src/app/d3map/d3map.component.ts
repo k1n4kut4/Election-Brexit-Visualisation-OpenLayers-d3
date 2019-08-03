@@ -98,6 +98,8 @@ export class D3mapComponent implements OnInit {
         overlaps: false
       }),
       style: function(feature) {
+          let id = feature.get('id');
+          console.log(id);
           return new Style({
               stroke: new Stroke({
                   color: '#09a7ee',
