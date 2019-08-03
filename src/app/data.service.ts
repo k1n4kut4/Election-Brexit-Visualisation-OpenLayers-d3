@@ -66,9 +66,23 @@ export class DataService {
 
       this.constitData = cd[id]; 
     
-    }else if(datatype == "ref" && dataset == "brexit"){ 
+    }else if(datatype == "ref" && dataset == "brexit"){
 
-      this.mp_data = RefBrexit["default"]; 
+      let code_ons_json = ConstitONS["default"];  
+
+      let filtered_code_ons_json = code_ons_json.filter(function (el) {
+        return el.pano == (id+1);
+      });  
+
+      let code_ons = filtered_code_ons_json[0]["ONSConstID"];
+
+      console.log(code_ons);
+
+      this.mp_data = RefBrexit["default"];
+
+      
+
+      //console.log(this.mp_data);
     
     }else if(datatype == "petition" && dataset == "brexit"){
 
