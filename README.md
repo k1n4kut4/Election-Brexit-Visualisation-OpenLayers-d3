@@ -1,6 +1,10 @@
-# Election/Brexit Data Visualisation: OpenLayers GIS, D3 Graph
+# Election/Brexit Data Visualisation: OpenLayers GIS, d3 Graph
 
 GIS project written in TypeScript and with Angular 8 framework. Without political intent, render of OpenLayers map of the UK, each constituency colour-coded by victor, and d3 bar chart of votes. Neutrally displayed data: results of elections (2017 and 2019), referendum (Brexit), and petitions (Brexit). Hover shows local MP.
+
+## Recfactored OpenLayers and d3 code
+
+Both the OpenLayers and d3 libraries were developed for use with JavaScript. Particularly d3's documentation (and any tutorials online) have code that references the DOM by selecting an id tag. However, in Angular, the approach is for the component logic (the .ts file) to update an array which we can loop through with NgFor in the HTML file. Therefore, I developed a new approach to these libraries, where the d3 bar chart is not rendered by injecting items to the DOM, but rather ngFor over 'rect' elements. Thus, I have written my own code to calculate the bar widths, so these are stored in the array.
 
 ## Routes
 
