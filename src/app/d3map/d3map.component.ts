@@ -111,11 +111,11 @@ export class D3mapComponent implements OnInit {
 
           return new Style({
               stroke: new Stroke({
-                  color: '#f2f2f2',
+                  colour: '#f2f2f2',
                   width: 1
               }),
               fill: new Fill({
-                  color: colourWheel, 
+                  colour: colourWheel, 
                   width: 1
               })
           });
@@ -173,54 +173,54 @@ export class D3mapComponent implements OnInit {
   } 
 
   getColourWheel(party){
-    let colorWheel;
+    let colourWheel;
 
     switch (party) {
       case "con":
-        colorWheel = "#0382AB";
+        colourWheel = "#0382AB";
         break;
       case "lab":
-        colorWheel = "#DA1502";
+        colourWheel = "#DA1502";
         break;
       case "ukip":
-        colorWheel = "#722889";
+        colourWheel = "#722889";
         break;
       case "lib":
-        colorWheel = "#FDB218";
+        colourWheel = "#FDB218";
         break;
       case "grn":
-        colorWheel = "#7AB630";
+        colourWheel = "#7AB630";
         break;
       case "plc":
-        colorWheel = "#3C862D";
+        colourWheel = "#3C862D";
         break;
       case "snp":
-        colorWheel = "#F0DE4C";
+        colourWheel = "#F0DE4C";
         break;
       case "dup":
-        colorWheel = "#FF9900";
+        colourWheel = "#FF9900";
         break;
       case "snf":
-        colorWheel = "#7AB630";
+        colourWheel = "#7AB630";
         break;
       case "oth":
-        colorWheel = "gray";
+        colourWheel = "gray";
         break; 
       case "petition":
-        colorWheel = "#7AB630";
+        colourWheel = "#7AB630";
         break;
       case "abstainees":
-        colorWheel = "#DA1502";
+        colourWheel = "#DA1502";
         break;
       case "leave":
-        colorWheel = "#7AB630";
+        colourWheel = "#7AB630";
         break;
       case "remain":
-        colorWheel = "#DA1502";
+        colourWheel = "#DA1502";
         break;
     }
 
-    return colorWheel;
+    return colourWheel;
   }
 
   createBarChart(datatype){ 
