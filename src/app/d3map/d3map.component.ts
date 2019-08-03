@@ -19,7 +19,7 @@ import TopoJSON from 'ol/format/TopoJSON.js';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
-import {Icon, Style} from 'ol/style';
+import {Icon, Style, Stroke, Fill} from 'ol/style';
 
 import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
 
@@ -87,7 +87,7 @@ export class D3mapComponent implements OnInit {
         url: 'https://api.tiles.mapbox.com/v4/mapbox.geography-class.json?secure&access_token=' + this.key,
         crossOrigin: ''
       })
-    }); 
+    });  
 
     this.topoJSONLayer = new VectorLayer({
       source: new VectorSource({
@@ -96,7 +96,15 @@ export class D3mapComponent implements OnInit {
           layers: ['subunits']
         }),
         overlaps: false
-      })
+      }),
+      style: function(feature) {
+          return new Style({
+              stroke: new Stroke({
+                  color: 'black',
+                  width: 1
+              })
+          });
+      }
     });
 
     this.map = new Map({
