@@ -314,7 +314,7 @@ export class D3mapComponent implements OnInit {
         });
       } 
       
-    }else if(datatype=="petition"){
+    }else if((datatype=="ref")||(datatype=="petition")){
 
       let widthSignatures = 200 * (parseInt(this.constitData[0]["signature_count"]) / parseInt(this.constitData[0]["electorate_size"]));
       let widthAbstainees = 200 * (parseInt(this.constitData[0]["abstained"]) / parseInt(this.constitData[0]["electorate_size"]));
