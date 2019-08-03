@@ -76,11 +76,28 @@ export class DataService {
 
       let code_ons = filtered_code_ons_json[0]["ONSConstID"];
 
-      console.log(code_ons);
+      let ref_data = RefBrexit["default"];
 
-      this.mp_data = RefBrexit["default"];
+      let constit_ref_data = ref_data.filter(function (el) {
+        return el.code_ons == code_ons;
+      });  
 
-      
+      console.log(constit_ref_data);
+
+      this.mp_data = Election2017["default"][id];
+
+      /*this.constitData = {
+        code_ons: this.mp_data["code_ons"],
+        constit: this.mp_data["constit"],
+        electorate_size: this.mp_data["electorate_size"],
+        mp_img: this.mp_data["mp_img"],
+        mp_name: this.mp_data["mp_name"],
+        others: this.mp_data["others"],
+        region: this.mp_data["region"],
+        signature_count: filtered_signatures[0]["signature_count"],
+        abstained: abstainees,
+        win: petition_win
+      }; */
 
       //console.log(this.mp_data);
     
