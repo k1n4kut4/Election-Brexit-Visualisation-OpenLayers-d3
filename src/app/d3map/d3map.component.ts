@@ -57,6 +57,8 @@ export class ConstitDataFields {
 export class D3mapComponent implements OnInit {  
   dataset: any;
   datatype: any;
+  datasetCapitalised: any;
+  datatypeCapitalised: any;
   map; 
   barData;
   vectorSource;
@@ -105,6 +107,9 @@ export class D3mapComponent implements OnInit {
       })
     });
 
+    this.datatypeCapitalised = this.capitaliseFirstLetter(this.datatype); 
+    this.datasetCapitalised = this.capitaliseFirstLetter(this.dataset);
+
     this.map.on('pointermove', (browserEvent) => {  
       let coordinate = browserEvent.coordinate; 
       let pixel = this.map.getPixelFromCoordinate(coordinate);  
@@ -123,6 +128,10 @@ export class D3mapComponent implements OnInit {
       }
     });
   } 
+  
+  capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   getColourWheel(party){
     let colorWheel;
