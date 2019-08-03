@@ -212,6 +212,12 @@ export class D3mapComponent implements OnInit {
       case "abstainees":
         colorWheel = "#DA1502";
         break;
+      case "leave":
+        colorWheel = "#7AB630";
+        break;
+      case "remain":
+        colorWheel = "#DA1502";
+        break;
     }
 
     return colorWheel;
@@ -316,8 +322,28 @@ export class D3mapComponent implements OnInit {
           "width": 200 * (parseInt(this.constitData[0]["oth"]) / electorate_size ) 
         });
       } 
-      
-    }else if((datatype=="ref")||(datatype=="petition")){
+    
+    }else if(datatype=="ref"){
+
+      let widthLeave = 200 * (parseInt(this.constitData[0]["signature_count"]) / parseInt(this.constitData[0]["electorate_size"]));
+      let widthRemain = 200 * (parseInt(this.constitData[0]["abstained"]) / parseInt(this.constitData[0]["electorate_size"]));
+
+      var partyData = [{
+        "party": "Leave",
+        "result": parseInt(this.constitData[0]["leave"]),
+        "colour": this.getColourWheel("leave"),
+        "y": 0,
+        "width":  widthLeave
+      },
+      {
+        "party": "Remain",
+        "result": parseInt(this.constitData[0]["remain"]),
+        "colour": this.getColourWheel("remain"),
+        "y": 25,
+        "width":  widthRemain
+      }]; 
+
+    }else if(datatype=="petition"){
 
       let widthSignatures = 200 * (parseInt(this.constitData[0]["signature_count"]) / parseInt(this.constitData[0]["electorate_size"]));
       let widthAbstainees = 200 * (parseInt(this.constitData[0]["abstained"]) / parseInt(this.constitData[0]["electorate_size"]));
