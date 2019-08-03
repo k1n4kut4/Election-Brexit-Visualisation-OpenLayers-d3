@@ -100,11 +100,14 @@ export class D3mapComponent implements OnInit {
       style: (feature) => { 
           let id = feature.get('id') - 1;
 
-          let constitData = this.updateConstitData(id,this.datatype,this.dataset);  
-
-          let winner = constitData[0]["win"];   
+          let constitData = this.updateConstitData(id,this.datatype,this.dataset);   
           
-          let colourWheel = this.getColourWheel(winner); 
+          let colourWheel = "#000";
+
+          if(constitData == []){
+            let winner = constitData[0]["win"];  
+            colourWheel = this.getColourWheel(winner); 
+          }
 
           return new Style({
               stroke: new Stroke({
