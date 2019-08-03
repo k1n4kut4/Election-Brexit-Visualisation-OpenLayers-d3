@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'; 
+import { Router } from "@angular/router"
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 
@@ -70,7 +71,7 @@ export class D3mapComponent implements OnInit {
   constitData = []; 
   winnerColourWheel: any;
 
-  constructor(private route: ActivatedRoute, private data: DataService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private data: DataService) {}
 
   ngOnInit() {  
     this.datatype = this.route.snapshot.paramMap.get('datatype'); 
@@ -136,8 +137,9 @@ export class D3mapComponent implements OnInit {
         return feature.get('id') - 1;
       });  
 
-      if(constit_id!=undefined){
-        console.log(constit_id);   
+      if(constit_id!=undefined){ 
+        //actual route to be /mp/profile/:id
+        this.router.navigate(['/map/election', constit_id]);
       }
 
     });
