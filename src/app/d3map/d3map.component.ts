@@ -339,9 +339,7 @@ export class D3mapComponent implements OnInit {
       .attr('viewBox', '0 0 ' + w + ' ' + h)
       .attr('perserveAspectRatio', 'xMinYMid')
       .attr('id', "sizer-result")
-      .attr('class', "sizer");
-
-    console.log(barsvg); 
+      .attr('class', "sizer"); 
     
     barsvg.attr("width", w).attr("height", h)
     .enter()
