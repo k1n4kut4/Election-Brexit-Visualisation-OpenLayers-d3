@@ -1,4 +1,4 @@
-# NgD3mapGisBrexitRef
+# Election/Brexit Data Visualisation: OpenLayers GIS, D3 Graph
 
 GIS project written in TypeScript and with Angular 8 framework. Without political intent, render of OpenLayers map of the UK, each constituency colour-coded by victor, and d3 bar chart of votes. Neutrally displayed data: results of elections (2017 and 2019), referendum (Brexit), and petitions (Brexit). Hover shows local MP.
 
