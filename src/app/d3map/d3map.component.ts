@@ -22,6 +22,7 @@ import VectorSource from 'ol/source/Vector';
 import {Icon, Style, Stroke, Fill} from 'ol/style';
 
 import * as MAPBOX_CONFIG from '../../assets/json/mapbox_config.json';
+import { html } from 'd3';
 
 export class ConstitDataFields {
   constructor(
@@ -100,12 +101,13 @@ export class D3mapComponent implements OnInit {
       style: (feature) => { 
           let id = feature.get('id') - 1;
 
-          let constitData = this.updateConstitData(id,this.datatype,this.dataset);   
+          let cd = [];
+          cd.push(this.updateConstitData(id,this.datatype,this.dataset));   
           
           let colourWheel = "#000"; 
 
-          if(constitData[0] != undefined){
-            let winner = constitData[0]["win"];  
+          if(cd[0] != undefined){
+            let winner = cd[0]["win"];  
             colourWheel = this.getColourWheel(winner); 
           }
 
@@ -143,7 +145,9 @@ export class D3mapComponent implements OnInit {
       });  
 
       if(constit_id!=undefined){
-        this.updateConstitData(constit_id, this.datatype, this.dataset);   
+        let cd = this.updateConstitData(constit_id, this.datatype, this.dataset);   
+        this.constitData.push(cd);
+        console.log(this.constitData);
       }
       
       if(this.constitData[0] != undefined){
@@ -402,18 +406,20 @@ export class D3mapComponent implements OnInit {
 
   updateConstitData(constit_id, datatype, dataset) { 
 
+    let cd = [];
+
     this.data.getConstitData(constit_id, datatype, dataset).subscribe(
       (res: ConstitDataFields[]) => { 
         this.constitData = [];
         if(res!==[]){ 
-          this.constitData.push(res);  
+          cd = res;  
         }
       },
       (err) => {
         //this.error = err; 
       }
     );
-    return this.constitData;
+    return cd;
   } 
 
 }
