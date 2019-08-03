@@ -213,10 +213,10 @@ export class D3mapComponent implements OnInit {
         colourWheel = "#DA1502";
         break;
       case "leave":
-        colourWheel = "#7AB630";
+        colourWheel = "#0382AB";
         break;
       case "remain":
-        colourWheel = "#DA1502";
+        colourWheel = "#FDB218";
         break;
     }
 
