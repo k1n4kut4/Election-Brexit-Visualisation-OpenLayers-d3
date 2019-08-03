@@ -34,7 +34,9 @@ export class ConstitDataFields {
     uup: any,
     others: any,
     signature_count: any,
-    abstained: any) {}
+    abstained: any,
+    remain: any,
+    leave: any) {}
 }
 
 @Injectable({
@@ -80,13 +82,17 @@ export class DataService {
 
       let constit_ref_data = ref_data.filter(function (el) {
         return el.code_ons == code_ons;
-      });  
-
-      console.log(constit_ref_data);
+      });   
 
       this.mp_data = Election2017["default"][id];
 
-      /*this.constitData = {
+      let petition_win = "leave";
+
+      if(constit_ref_data[0]["leave"] < constit_ref_data[0]["vote_remain"]){
+        petition_win = "remain";
+      }
+
+      this.constitData = {
         code_ons: this.mp_data["code_ons"],
         constit: this.mp_data["constit"],
         electorate_size: this.mp_data["electorate_size"],
@@ -94,12 +100,12 @@ export class DataService {
         mp_name: this.mp_data["mp_name"],
         others: this.mp_data["others"],
         region: this.mp_data["region"],
-        signature_count: filtered_signatures[0]["signature_count"],
-        abstained: abstainees,
+        leave: constit_ref_data[0]["leave"],
+        remain: constit_ref_data[0]["vote_remain"],
         win: petition_win
-      }; */
+      }; 
 
-      //console.log(this.mp_data);
+      console.log(this.constitData);
     
     }else if(datatype == "petition" && dataset == "brexit"){
 
