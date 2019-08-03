@@ -1,8 +1,19 @@
 # NgD3mapGisBrexitRef
 
-GIS project - without political intent. Render of d3 JavaScript chart map within TypeScript Angular 8. Brexit ref results neutrally displayed; constituencies colour-coded by result. Hover shows local MP.
+GIS project written in TypeScript and with Angular 8 framework. Without political intent, render of OpenLayers map of the UK, each constituency colour-coded by victor, and d3 bar chart of votes. Neutrally displayed data: results of elections (2017 and 2019), referendum (Brexit), and petitions (Brexit). Hover shows local MP.
 
-![preview](./readme_imgs/img1.png)  
+## Routes
+
+### /ref/brexit
+![preview](./readme_imgs/ref-brexit.png)  
+
+Government data is by local authority, which gives no idea of how an MP's area voted - here I present data regrouped by Parliamentary constituency.
+
+### /petition/brexit
+![preview](./readme_imgs/petition-brexit.png)  
+
+### /election/[year] e.g. 2017
+![preview](./readme_imgs/election-2017.png)  
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
