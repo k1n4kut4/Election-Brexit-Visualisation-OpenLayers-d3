@@ -100,7 +100,7 @@ export class DataService {
         mp_name: this.mp_data["mp_name"],
         others: this.mp_data["others"],
         region: this.mp_data["region"],
-        leave: constit_ref_data[0]["leave"],
+        leave: constit_ref_data[0]["vote_leave"],
         remain: constit_ref_data[0]["vote_remain"],
         win: petition_win
       }; 
