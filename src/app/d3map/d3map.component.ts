@@ -323,10 +323,10 @@ export class D3mapComponent implements OnInit {
         });
       } 
     
-    }else if(datatype=="ref"){
+    }else if(datatype=="ref"){ 
 
-      let widthLeave = 200 * (parseInt(this.constitData[0]["signature_count"]) / parseInt(this.constitData[0]["electorate_size"]));
-      let widthRemain = 200 * (parseInt(this.constitData[0]["abstained"]) / parseInt(this.constitData[0]["electorate_size"]));
+      let widthLeave = 200 * (parseInt(this.constitData[0]["leave"])/100);
+      let widthRemain = 200 * (parseInt(this.constitData[0]["remain"])/100); 
 
       var partyData = [{
         "party": "Leave",
@@ -363,7 +363,7 @@ export class D3mapComponent implements OnInit {
         "width":  widthAbstainees
       }];
 
-    }
+    } 
 
     this.barData = partyData;
 
