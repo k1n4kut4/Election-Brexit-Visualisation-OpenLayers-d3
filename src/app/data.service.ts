@@ -7,6 +7,7 @@ import * as Election2017 from '../assets/json/mp_details_full.json';
 import * as Election0 from '../assets/json/election-data.json'; 
 import * as ConstitONS from '../assets/json/constit_ons.json'; 
 import * as PetitionBrexit from '../assets/json/petitions-241584.json'; 
+import * as RefBrexit from '../assets/json/eu_ref.json';
 
 export class ConstitDataFields {
   constructor(
@@ -60,15 +61,12 @@ export class DataService {
     
     }else if(datatype == "ref" && dataset == "brexit"){
 
-      this.mp_data = Election2017["default"][id];
+      this.mp_data = RefBrexit["default"];
+      console.log(this.mp_data);
     
     }else if(datatype == "petition" && dataset == "brexit"){
 
-      this.mp_data = Election2017["default"][id];
-
-    }
-
-    if((datatype == "ref" || datatype == "petition") && dataset == "brexit"){
+      this.mp_data = Election2017["default"][id]; 
 
       let code_ons = this.mp_data["code_ons"];  
       let signatures_by_constituency = PetitionBrexit["default"]["data"]["attributes"]["signatures_by_constituency"];
