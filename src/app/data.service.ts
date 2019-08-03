@@ -4,6 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as Election2017 from '../assets/json/mp_details_full.json'; 
+import * as Election2019 from '../assets/json/mp_details_full_2019.json'; 
 import * as Election0 from '../assets/json/election-data.json'; 
 import * as ConstitONS from '../assets/json/constit_ons.json'; 
 import * as PetitionBrexit from '../assets/json/petitions-241584.json'; 
@@ -56,6 +57,12 @@ export class DataService {
     if(datatype == "election" && dataset == "2017"){
 
       cd = Election2017["default"];    
+
+      this.constitData = cd[id]; 
+
+    }else if(datatype == "election" && dataset == "2019"){
+
+      cd = Election2019["default"];    
 
       this.constitData = cd[id]; 
     
