@@ -8,16 +8,16 @@ Both the OpenLayers and d3 libraries were developed for use with JavaScript. Par
 
 ## Routes
 
-### /ref/brexit
+### /election/[year] e.g. 2017
 ![preview](./readme_imgs/ref-brexit.png)  
+
+### /ref/brexit
+![preview](./readme_imgs/election-2017.png)  
 
 Government data is by local authority, which gives no idea of how an MP's area voted - here I present data regrouped by Parliamentary constituency.
 
 ### /petition/brexit
 ![preview](./readme_imgs/petition-brexit.png)  
-
-### /election/[year] e.g. 2017
-![preview](./readme_imgs/election-2017.png)  
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
