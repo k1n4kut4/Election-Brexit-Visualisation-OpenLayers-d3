@@ -102,9 +102,7 @@ export class D3mapComponent implements OnInit {
 
           let constitData = this.updateConstitData(id,this.datatype,this.dataset);   
           
-          let colourWheel = "#000";
-
-          console.log(constitData[0]);
+          let colourWheel = "#000"; 
 
           if(constitData[0] != undefined){
             let winner = constitData[0]["win"];  

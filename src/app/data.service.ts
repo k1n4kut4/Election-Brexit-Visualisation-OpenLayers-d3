@@ -66,10 +66,9 @@ export class DataService {
 
       this.constitData = cd[id]; 
     
-    }else if(datatype == "ref" && dataset == "brexit"){
+    }else if(datatype == "ref" && dataset == "brexit"){ 
 
-      this.mp_data = RefBrexit["default"];
-      console.log(this.mp_data);
+      this.mp_data = RefBrexit["default"]; 
     
     }else if(datatype == "petition" && dataset == "brexit"){
 
