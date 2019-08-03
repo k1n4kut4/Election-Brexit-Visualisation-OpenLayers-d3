@@ -127,8 +127,22 @@ export class D3mapComponent implements OnInit {
         this.createBarChart(this.datatype);
       }
     });
+
+    this.map.on('click', (browserEvent) => {  
+      let coordinate = browserEvent.coordinate; 
+      let pixel = this.map.getPixelFromCoordinate(coordinate);  
+
+      let constit_id = this.map.forEachFeatureAtPixel(pixel, function(this, feature) {
+        return feature.get('id') - 1;
+      });  
+
+      if(constit_id!=undefined){
+        console.log(constit_id);   
+      }
+
+    });
   } 
-  
+
   capitaliseFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
