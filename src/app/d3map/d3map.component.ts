@@ -108,7 +108,7 @@ export class D3mapComponent implements OnInit {
 
           return new Style({
               stroke: new Stroke({
-                  color: '#09a7ee',
+                  color: '#f2f2f2',
                   width: 1
               }),
               fill: new Fill({
