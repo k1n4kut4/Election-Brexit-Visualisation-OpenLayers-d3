@@ -11,10 +11,10 @@ Both the OpenLayers and d3 libraries were developed for use with JavaScript. Par
 ### /election/[year] e.g. 2017
 ![preview](./readme_imgs/ref-brexit.png)  
 
-### /ref/brexit
-![preview](./readme_imgs/election-2017.png)  
-
+### /ref/brexit 
 Government data is by local authority, which gives no idea of how an MP's area voted - here I present data regrouped by Parliamentary constituency.
+
+![preview](./readme_imgs/election-2017.png) 
 
 ### /petition/brexit
 ![preview](./readme_imgs/petition-brexit.png)  
