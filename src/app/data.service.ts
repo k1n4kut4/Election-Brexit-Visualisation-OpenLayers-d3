@@ -88,7 +88,7 @@ export class DataService {
 
       let petition_win = "leave";
 
-      if(constit_ref_data[0]["leave"] < constit_ref_data[0]["vote_remain"]){
+      if(constit_ref_data[0]["vote_leave"] < constit_ref_data[0]["vote_remain"]){
         petition_win = "remain";
       }
 
