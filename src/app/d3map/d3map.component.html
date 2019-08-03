@@ -14,11 +14,14 @@
         
                 <div id="mp_details" *ngIf="constit !==undefined">
                     <p>{{ constit.region }}</p>
-                    <p><strong>Constituency:</strong> {{ constit.constit }} ({{ constit.code_ons }})</p>
+
+                    <p id="constit_name" [style.background]="winnerColourWheel">
+                        <strong>Constituency:</strong> {{ constit.constit }} ({{ constit.code_ons }})
+                    </p>
 
                     <img src="{{ constit.mp_img }}"> 
 
-                    <p id="mp_name" [style.background]="winnerColourWheel">
+                    <p id="mp_name">
                         <strong>MP Name:</strong> {{ constit.mp_name }} ({{ constit.win }}) 
                     </p>
 
