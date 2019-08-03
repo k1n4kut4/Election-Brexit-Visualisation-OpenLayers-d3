@@ -100,7 +100,11 @@ export class D3mapComponent implements OnInit {
       style: function(feature) {
           return new Style({
               stroke: new Stroke({
-                  color: 'black',
+                  color: '#09a7ee',
+                  width: 1
+              }),
+              fill: new Fill({
+                  color: '#fff',
                   width: 1
               })
           });
