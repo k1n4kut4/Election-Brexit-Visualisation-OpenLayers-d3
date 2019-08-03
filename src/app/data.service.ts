@@ -41,6 +41,7 @@ export class ConstitDataFields {
 export class DataService {
 
   constitData: ConstitDataFields[] = [];
+  mp_data: any;
 
   constructor() { }  
 
@@ -57,17 +58,26 @@ export class DataService {
 
       this.constitData = cd[id]; 
     
+    }else if(datatype == "ref" && dataset == "brexit"){
+
+      this.mp_data = Election2017["default"][id];
+    
     }else if(datatype == "petition" && dataset == "brexit"){
 
-      let mp_data = Election2017["default"][id];
-      let code_ons = mp_data["code_ons"];  
+      this.mp_data = Election2017["default"][id];
+
+    }
+
+    if((datatype == "ref" || datatype == "petition") && dataset == "brexit"){
+
+      let code_ons = this.mp_data["code_ons"];  
       let signatures_by_constituency = PetitionBrexit["default"]["data"]["attributes"]["signatures_by_constituency"];
       
       let filtered_signatures = signatures_by_constituency.filter(function (el) {
         return el.ons_code == code_ons;
       }); 
 
-      let abstainees = mp_data["electorate_size"]-filtered_signatures[0]["signature_count"];
+      let abstainees = this.mp_data["electorate_size"]-filtered_signatures[0]["signature_count"];
 
       let petition_win = "petition";
 
@@ -76,13 +86,13 @@ export class DataService {
       }
 
       this.constitData = {
-        code_ons: mp_data["code_ons"],
-        constit: mp_data["constit"],
-        electorate_size: mp_data["electorate_size"],
-        mp_img: mp_data["mp_img"],
-        mp_name: mp_data["mp_name"],
-        others: mp_data["others"],
-        region: mp_data["region"],
+        code_ons: this.mp_data["code_ons"],
+        constit: this.mp_data["constit"],
+        electorate_size: this.mp_data["electorate_size"],
+        mp_img: this.mp_data["mp_img"],
+        mp_name: this.mp_data["mp_name"],
+        others: this.mp_data["others"],
+        region: this.mp_data["region"],
         signature_count: filtered_signatures[0]["signature_count"],
         abstained: abstainees,
         win: petition_win
